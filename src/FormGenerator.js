@@ -22,18 +22,19 @@ const FormGenerator = (props) => {
     const [dependenciesMapping, setDependenciesMapping] = useState(computeDependencies(formOptions));
     // const [formValues, setFormValues] = useState(computeFormValues(formOptions));
     const { watch, handleSubmit, register, errors, control, setValue } = useForm();
+    // const { dirty, isSubmitting, touched, submitCount } = formState;
+    // const fieldsWatch = watch();
 
     const handleChange = (event) => {
         // setFormValues({...formValues, [event.target.id]: event.target.value });
         if (dependenciesMapping[event.target.id]) {
             const fieldsToResetFromDependency = dependenciesMapping[event.target.id];
-            fieldsToResetFromDependency.forEach((fieldName) => {setValue(fieldName, "Resetted"); });
+            fieldsToResetFromDependency.forEach((fieldName) => { setValue(fieldName, "Resetted"); handleChange({ target: { id: fieldName }})});
         }
        
     };
 
-        // const { dirty, isSubmitting, touched, submitCount } = formState;
-        // const fieldsWatch = watch();
+
 
 
     const onSubmit = values => console.log(values);
