@@ -12,9 +12,24 @@ const testFormOptions = [
         id: 2,
         inputLabel: 'botao2',
         inputType: 'textInput',
-        dependencies: 1,
+        dependencies: ["botao3", "botao4"],
         inputProps: {
-            label: "Nome Reclamação"
+            label: "Botao 2"
+        },
+        margin: "0px 0px 10px 0px",
+        validation: {
+            validate: value => value !== "admin" || "Nice try!"
+        }
+            
+          
+    },
+    {
+        id: 3,
+        inputLabel: 'botao3',
+        inputType: 'textInput',
+        dependencies: [],
+        inputProps: {
+            label: "Botao 3"
         },
         margin: "0px 0px 10px 0px",
         validation: {

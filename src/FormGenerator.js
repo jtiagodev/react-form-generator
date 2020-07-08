@@ -1,21 +1,43 @@
-import React, { createRef, useRef } from 'react';
+import React, { createRef, useRef, useEffect, useState } from 'react';
 import { Flex } from './Grid';
 import PropTypes from 'prop-types';
 import Button from "./Form/Button";
 import TextInput from "./Form/TextInput";
 import testFormOptions from "./utils/testFormOptions";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from '@material-ui/core'
+import { computeDependencies, computeFormValues } from "./utils/misc";
+
 
 const defaultTypesMap = {
     button: Button,
     textInput: TextInput
 };
 
+
 const FormGenerator = (props) => {
+
+
     const { typesMap = defaultTypesMap, colSize = 200, rowNum = 1, colNum = 3, formOptions = testFormOptions, margin = '5px' } = props;
-    const { handleSubmit, register, errors } = useForm();
+    const [dependenciesMapping, setDependenciesMapping] = useState(computeDependencies(formOptions));
+    // const [formValues, setFormValues] = useState(computeFormValues(formOptions));
+    const { watch, handleSubmit, register, errors, control, setValue } = useForm();
+
+    const handleChange = (event) => {
+        // setFormValues({...formValues, [event.target.id]: event.target.value });
+        if (dependenciesMapping[event.target.id]) {
+            const fieldsToResetFromDependency = dependenciesMapping[event.target.id];
+            fieldsToResetFromDependency.forEach((fieldName) => {setValue(fieldName, "Resetted"); });
+        }
+       
+    };
+
+        // const { dirty, isSubmitting, touched, submitCount } = formState;
+        // const fieldsWatch = watch();
+
+
     const onSubmit = values => console.log(values);
+
 
     const rows = [];
     const cols = [];
@@ -29,6 +51,7 @@ const FormGenerator = (props) => {
   
 
     const FormEntry = ({ row, col }) => {
+
         // Calculate which FormEntry to be rendered
         let index;
         if (row === 0) {
@@ -36,7 +59,6 @@ const FormGenerator = (props) => {
         } else {
             index = (row * colNum) + col;
         }
-
         if (formOptions[index]) {
 
             const entrySize = formOptions[index].cols || 1;
@@ -49,16 +71,18 @@ const FormGenerator = (props) => {
             const entryAlignItems = formOptions[index].alignY || 'center';
             const entryValidation = formOptions[index].validation || { required: "Required" };
             const entryInputLabel = formOptions[index].inputLabel; //|| uuid()
-       
+            const entryDependencies = formOptions[index].dependencies || [];
+            
+           
+
 
             if (typesMap[entryType]) {
                 // const ref = createRef();
                 const TypeComponent = typesMap[entryType];
                 return (
                                <Flex flexDirection="column" justifyContent={entryJustifyContent} alignItems={entryAlignItems} key={index} style={{ width: `${divSize}px`, margin: divMargin }}>
-                                <TypeComponent inputRef={register({ ...entryValidation })} inputLabel={entryInputLabel} {...entryInputProps} />
+                                <TypeComponent onChange={handleChange} inputRef={register({ ...entryValidation })} inputLabel={entryInputLabel} {...entryInputProps} />
                                 {errors[entryInputLabel] && errors[entryInputLabel].message}
-
                                </Flex>
                 );
             } else {
