@@ -1,4 +1,13 @@
-const testFormOptions = [
+
+import Button from "../Form/Button";
+import TextInput from "../Form/TextInput";
+
+export const defaultTypesMap = {
+  button: Button,
+  textInput: TextInput,
+};
+
+export const testFormOptions = [
     // {
     //     id: 1,
     //     inputLabel: 'botao1',
@@ -13,10 +22,13 @@ const testFormOptions = [
         inputLabel: 'botao2',
         inputType: 'textInput',
         dependencies: ["botao3"],
+        defaultValue: "Default1",
+        resetValue: "",
         inputProps: {
             label: "Botao 2"
         },
         margin: "0px 0px 10px 0px",
+        showValidation: true,
         validation: {
             validate: value => value !== "admin" || "Nice try!"
         }
@@ -28,6 +40,7 @@ const testFormOptions = [
         inputLabel: 'botao3',
         inputType: 'textInput',
         dependencies: ["botao4"],
+        defaultValue: "Default1",
         inputProps: {
             label: "Botao 3"
         },
@@ -64,5 +77,3 @@ const testFormOptions = [
     //     margin: "0px 0px 10px 0px"
     // }
 ];
-
-export default testFormOptions;

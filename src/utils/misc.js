@@ -36,13 +36,3 @@ export const computeFormValues = (formOptions = []) => {
     console.log(values);
     return values;
 };
-
-
-// let dependenciesWatcher = {};
-// entryDependencies.forEach((dependency) => {
-//     dependenciesWatcher[dependency] = useWatch({
-//         control,
-//         name: 'firstName', // without supply name will watch the entire form, or ['firstName', 'lastName'] to watch both
-//         defaultValue: 'default' // default value before the render
-//       });
-// });
