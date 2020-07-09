@@ -7,22 +7,17 @@ import { Paper, FormGroup, TextField } from "@material-ui/core";
 import { computeDependencies, computeFormValues } from "./utils/misc";
 import { InputOptionsSchema } from "./utils/schemas";
 import ErrorMessage from "./Form/ErrorMessage";
-import { defaultProps } from 'recompose';
-
+import { defaultProps } from "recompose";
+import FormGeneratorRender from "./FormGenerator/FormGeneratorRender";
+import FormEntry from "./FormGenerator/FormEntry";
+import FormContext from './FormGenerator/context';
 
 const FormGenerator = (props) => {
-  const {
-    typesMap,
-    colSize,
-    rowNum,
-    colNum,
-    formOptions,
-    margin
-  } = props;
+  const { typesMap, colSize, rowNum, colNum, formOptions, margin } = props;
+
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
-  // const [formValues, setFormValues] = useState(computeFormValues(formOptions));
   const {
     watch,
     handleSubmit,
@@ -31,8 +26,7 @@ const FormGenerator = (props) => {
     control,
     setValue,
   } = useForm();
-  // const { dirty, isSubmitting, touched, submitCount } = formState;
-  // const fieldsWatch = watch();
+
 
   const handleChange = (event) => {
     // setFormValues({...formValues, [event.target.id]: event.target.value });
@@ -47,6 +41,7 @@ const FormGenerator = (props) => {
 
   const onSubmit = (values) => console.log(values);
 
+  // Aux Row and Cols for Cell Builder with .map
   const rows = [];
   const cols = [];
   for (var i = 0; i < rowNum; i++) {
@@ -56,108 +51,28 @@ const FormGenerator = (props) => {
     cols.push(i);
   }
 
-  const FormEntry = ({ row, col }) => {
-    
-    // Calculate which FormEntry to be rendered
-    let index;
-    if (row === 0) {
-      index = row + col;
-    } else {
-      index = row * colNum + col;
-    }
 
-  
-    if (formOptions[index]) {
-        const { value, error, warning } = InputOptionsSchema.validate(formOptions[index]);
-
-        const entrySize = formOptions[index].cols || 1;
-        const divSize = colSize * entrySize;
-        const entryJustifyContent = formOptions[index].alignX || "center";
-        const entryAlignItems = formOptions[index].alignY || "center";
-        const divMargin = formOptions[index].margin || margin;
-        const entryType = formOptions[index].inputType;
-        const entryId = formOptions[index].id || index + 1;
-        const entryInputProps = formOptions[index].inputProps || {};
-        const entryValidation = formOptions[index].validation || {
-          required: "Required",
-        };
-        const entryInputLabel = formOptions[index].inputLabel; //|| uuid()
-        const entryDependencies = formOptions[index].dependencies || [];
-        const entryShowValidation = formOptions[index].showValidation || true;
-        
-    if (error) {
-        return (
-            <Flex
-            flexDirection="column"
-            justifyContent={entryJustifyContent}
-            alignItems={entryAlignItems}
-            key={index}
-            style={{ width: `${divSize}px`, margin: divMargin }}
-          >
-        <ErrorMessage>Invalid Input Object</ErrorMessage>
-        <ErrorMessage>{error.toString()}</ErrorMessage>
-        </Flex>
-        )
-    };
-
-      
-
-
-      if (typesMap[entryType]) {
-        // const ref = createRef();
-        const TypeComponent = typesMap[entryType];
-        return (
-          <Flex
-            flexDirection="column"
-            justifyContent={entryJustifyContent}
-            alignItems={entryAlignItems}
-            key={index}
-            style={{ width: `${divSize}px`, margin: divMargin }}
-          >
-            <TypeComponent
-              onChange={handleChange}
-              inputRef={register({ ...entryValidation })}
-              inputLabel={entryInputLabel}
-              inputProps={entryInputProps}
-              control={control}
-            />
-            {entryShowValidation &&
-              errors[entryInputLabel] &&
-              errors[entryInputLabel].message}
-          </Flex>
-        );
-      } else {
-        return (
-          <Flex
-            justifyContent={entryJustifyContent}
-            alignItems={entryAlignItems}
-            key={index}
-            style={{ width: `${divSize}px`, margin: divMargin }}
-          >
-            <ErrorMessage>{`Undefined 'type' for FormComponent ID: ${entryId}`}</ErrorMessage>
-          </Flex>
-        );
-      }
-    } else {
-      return null;
-    }
-  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex flexDirection="column">
-        {rows.map((row, i) => (
-          <Flex flexWrap="wrap" flexDirection="row" key={i}>
-            {cols.map((col, j) => (
-              <FormEntry row={i} col={j} />
-            ))}
-          </Flex>
-        ))}
-      </Flex>
-    </form>
+  <FormContext.Provider value={{
+    formOptions: formOptions,
+    colNum: colNum,
+    colSize: colSize,
+    margin: margin,
+    typesMap: typesMap,
+    handleChange: handleChange,
+    register: register,
+    control: control,
+    errors: errors
+  }}>
+   <FormGeneratorRender 
+   onSubmit={handleSubmit(onSubmit)}
+   rows={rows}
+   cols={cols}
+   />
+   </FormContext.Provider>
   );
 };
-
 
 FormGenerator.propTypes = {
   /**
@@ -186,14 +101,13 @@ FormGenerator.propTypes = {
   margin: PropTypes.number,
 };
 
-
 const withDefaultProps = defaultProps({
-    typesMap: defaultTypesMap,
-    colSize: 200,
-    rowNum: 2,
-    colNum: 2,
-    margin: "5px",
-    formOptions: testFormOptions
+  typesMap: defaultTypesMap,
+  colSize: 200,
+  rowNum: 2,
+  colNum: 2,
+  margin: "5px",
+  formOptions: testFormOptions,
 });
 
 export default withDefaultProps(FormGenerator);

@@ -1,12 +1,22 @@
 import Joi from "@hapi/joi";
 import { v4 as uuidv4 } from 'uuid';
 
-export const ValidationSchema = Joi.object({
+
+export const MuiSelectSchema = Joi.object().keys({
+    // Options to populate Select
+    options: Joi.array().items(Joi.object().keys({
+        label: Joi.string().required(),
+        value: Joi.alternatives(Joi.string(),Joi.number()).required()
+    }))
+});
+
+export const ValidationSchema = Joi.object().keys({
     // Validating functions
     validate: Joi.alternatives(Joi.func())
 });
 
 export const InputOptionsSchema = Joi.object({
+    // TODO: Add refData source, for populating onLoad
     // Identifier
     id: Joi.alternatives(Joi.string(), Joi.number())
         .required(),
@@ -19,6 +29,7 @@ export const InputOptionsSchema = Joi.object({
         .required(),
     // Input type to render the Component (must be mapped in typesMapper)
     inputType: Joi.string().default("button").required(),
+    // TODO: Change to resetWith and add disableWith , rather with dependencies
     // List of inputLabel dependencies, which are resetted to "resetValue" when value of the input is changed
     dependencies: Joi.array().items(Joi.string()).required(),
     // Default Value for the input
@@ -32,7 +43,7 @@ export const InputOptionsSchema = Joi.object({
     // Display Error Validation Messages
     showValidation: Joi.boolean(),
     // Validation options
-    validation: Joi.object(),
+    validation: ValidationSchema,
     // Number of cells to spawn the Input
     cols: Joi.number()
 });
