@@ -6,7 +6,13 @@ const TextInput = (props) => {
     // const myRef = useRef(ref);
 
     return (
-        <TextField id={inputLabel} onChange={onChange} inputProps={{ name: inputLabel }} label={label} inputRef={inputRef} {...inputProps} />
+        <TextField 
+        id={inputLabel} 
+        onChange={onChange} 
+        inputProps={{ name: inputLabel }} 
+        label={label} 
+        inputRef={inputRef} 
+        />
 
     );
 };

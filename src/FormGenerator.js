@@ -86,10 +86,6 @@ const FormGenerator = (props) => {
         const entryShowValidation = formOptions[index].showValidation || true;
         
     if (error) {
-        console.log(error);
-        console.log(value);
-        console.log(warning);
-        
         return (
             <Flex
             flexDirection="column"
@@ -99,6 +95,7 @@ const FormGenerator = (props) => {
             style={{ width: `${divSize}px`, margin: divMargin }}
           >
         <ErrorMessage>Invalid Input Object</ErrorMessage>
+        <ErrorMessage>{error.toString()}</ErrorMessage>
         </Flex>
         )
     };
@@ -121,7 +118,8 @@ const FormGenerator = (props) => {
               onChange={handleChange}
               inputRef={register({ ...entryValidation })}
               inputLabel={entryInputLabel}
-              {...entryInputProps}
+              inputProps={entryInputProps}
+              control={control}
             />
             {entryShowValidation &&
               errors[entryInputLabel] &&
