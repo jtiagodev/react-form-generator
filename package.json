@@ -23,8 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "flowbuild": "babel src/ -d lib/",
-    "flowprepublish": "yarn run build2"
+    "docgen-sample": "./node_modules/.bin/react-docgen ./src/FormGenerator.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +41,6 @@
     ]
   },
   "devDependencies": {
-    "flow-bin": "^0.129.0",
     "react-docgen": "^5.3.0"
   }
 }
