@@ -1,9 +1,11 @@
 import React from 'react';
 import { Flex } from "./../Grid";
 import FormEntry from "./FormEntry";
+import MuiButton from "./../Form/MuiButton";
 
 const FormGeneratorRender = (props) => {
-    const { onSubmit, rows, cols } = props;
+    const { onSubmit, onReset, rows, cols, enableFooter,
+    enableFooterButtons } = props;
 
    return (
     <form onSubmit={onSubmit}>
@@ -17,6 +19,13 @@ const FormGeneratorRender = (props) => {
       ))}
     </Flex>
     <input style={{ display: 'none' }} type="submit" />
+    {enableFooter && (
+    <Flex flexDirection="row" alignItems="center" justifyContent="flex-end" >
+      {enableFooterButtons && (<>
+      <MuiButton onClick={onSubmit} text="Submit" />
+      <MuiButton onClick={() => onReset()}  text="Clear" />
+      </>)}
+    </Flex>)}
   </form>
    ) 
 };

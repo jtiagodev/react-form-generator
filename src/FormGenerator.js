@@ -1,11 +1,11 @@
 import React, { createRef, useRef, useEffect, useState } from "react";
 import { Flex } from "./Grid";
 import PropTypes from "prop-types";
-import { defaultTypesMap } from "./utils/defaults";
+import { defaultTypesMap, formGeneratorDefaultValues } from "./utils/defaults";
 import { testFormOptions } from "./utils/demo";
 import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from "@material-ui/core";
-import { computeDependencies, computeFormValues } from "./utils/misc";
+import { computeDependencies, computeFormValues, computeDefaultValues } from "./utils/form";
 import { InputOptionsSchema } from "./utils/schemas";
 import ErrorMessage from "./Form/ErrorMessage";
 import { defaultProps } from "recompose";
@@ -14,11 +14,14 @@ import FormEntry from "./FormGenerator/FormEntry";
 import FormContext from './FormGenerator/context';
 
 const FormGenerator = (props) => {
-  const { typesMap, colSize, rowNum, colNum, formOptions, margin } = props;
+  const { typesMap, colSize, rowNum, colNum, formOptions, margin, enableFooter, enableFooterButtons } = props;
 
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
+  
+  const [defaultValues, setDefaultValues] = useState(computeDefaultValues(formOptions));
+
   const {
     watch,
     handleSubmit,
@@ -26,8 +29,12 @@ const FormGenerator = (props) => {
     errors,
     control,
     setValue,
+    reset
   } = useForm();
 
+  const handleReset = () => {
+    reset(defaultValues)
+  };
 
   const handleChange = (event) => {
     // setFormValues({...formValues, [event.target.id]: event.target.value });
@@ -70,12 +77,23 @@ const FormGenerator = (props) => {
    onSubmit={handleSubmit(onSubmit)}
    rows={rows}
    cols={cols}
+   enableFooter={enableFooter}
+   enableFooterButtons={enableFooterButtons}
+   onReset={handleReset}
    />
    </FormContext.Provider>
   );
 };
 
 FormGenerator.propTypes = {
+  /**
+   * Maximum Width of the Form Container
+   */
+  maxWidth: PropTypes.string,
+  /**
+   * Maximum Height of the Form Container
+   */
+  maxHeight: PropTypes.string,
   /**
    * (Advanced usage) Mapping the supported types of Form Inputs provided to the Form Generator
    */
@@ -100,15 +118,16 @@ FormGenerator.propTypes = {
    * Default magins applied to each cell
    */
   margin: PropTypes.number,
+  /**
+   * Enable Form Footer
+   */
+  enableFooter: PropTypes.bool,
+  /**
+   * Enable Default Footer Buttons
+   */
+  enableFooterButtons: PropTypes.bool,
 };
 
-const withDefaultProps = defaultProps({
-  typesMap: defaultTypesMap,
-  colSize: 200,
-  rowNum: 2,
-  colNum: 2,
-  margin: "5px",
-  formOptions: testFormOptions,
-});
+const withDefaultProps = defaultProps(formGeneratorDefaultValues);
 
 export default withDefaultProps(FormGenerator);

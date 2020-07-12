@@ -4,6 +4,7 @@ import MuiTextInput from "../Form/MuiTextInput";
 import MuiSelect from "../Form/MuiSelect";
 import { v4 as uuidv4 } from 'uuid';
 import { LabelPositionEnum } from "./enums";
+import { testFormOptions } from "../utils/demo";
 
 // TODO: extend to component and inputPropsSchema
 export const defaultTypesMap = {
@@ -12,7 +13,6 @@ export const defaultTypesMap = {
   select: MuiSelect,
 };
 
-// TODO: Complete all default values to merge with received configuration object
 export const formOptionDefaultValues = {
     cols: 1,
     alignX: "center",
@@ -27,4 +27,17 @@ export const formOptionDefaultValues = {
     labelText: "Input Label",
     labelMarginRight: "10px",
     labelStyle: { fontSize: "12px" }
+};
+
+export const formGeneratorDefaultValues = {
+    
+        typesMap: defaultTypesMap,
+        colSize: 200,
+        rowNum: 2,
+        colNum: 2,
+        margin: "5px",
+        formOptions: testFormOptions,
+        enableFooter: true,
+        enableFooterButtons: true
+      
 };

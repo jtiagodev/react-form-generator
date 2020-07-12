@@ -67,7 +67,7 @@ export default function CustomizedButton(props) {
   const classes = useStyles();
 
   return (
-      <ColorButton variant="contained" color="primary" className={classes.margin}>
+      <ColorButton onClick={props.onClick} variant="contained" color="primary" className={classes.margin}>
         {props.text}
       </ColorButton>
     

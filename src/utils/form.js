@@ -24,7 +24,7 @@ export const computeDependencies = (formOptions = []) => {
     return dependenciesMap;
 };
 
-export const computeFormValues = (formOptions = []) => {
+export const computeDefaultValues = (formOptions = []) => {
     let  values = {};
 
     // keys reset values within array (onChange)
