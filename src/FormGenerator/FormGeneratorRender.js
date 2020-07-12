@@ -16,6 +16,7 @@ const FormGeneratorRender = (props) => {
         </Flex>
       ))}
     </Flex>
+    <input style={{ display: 'none' }} type="submit" />
   </form>
    ) 
 };

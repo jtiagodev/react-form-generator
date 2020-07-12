@@ -1,7 +1,8 @@
 import React, { createRef, useRef, useEffect, useState } from "react";
 import { Flex } from "./Grid";
 import PropTypes from "prop-types";
-import { testFormOptions, defaultTypesMap } from "./utils/defaults";
+import { defaultTypesMap } from "./utils/defaults";
+import { testFormOptions } from "./utils/demo";
 import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from "@material-ui/core";
 import { computeDependencies, computeFormValues } from "./utils/misc";
@@ -39,7 +40,7 @@ const FormGenerator = (props) => {
     }
   };
 
-  const onSubmit = (values) => console.log(values);
+  const onSubmit = (values) => alert(Object.values(values).toString());
 
   // Aux Row and Cols for Cell Builder with .map
   const rows = [];

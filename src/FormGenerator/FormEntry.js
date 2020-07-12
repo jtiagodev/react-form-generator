@@ -3,6 +3,9 @@ import FormContext from './../FormGenerator/context';
 import { InputOptionsSchema } from "./../utils/schemas";
 import { Flex } from "./../Grid";
 import ErrorMessage from "./../Form/ErrorMessage";
+import { LabelPositionEnum } from './../utils/enums';
+import { formOptionDefaultValues } from "./../utils/defaults";
+import * as R from "ramda";
 
 const FormEntry = ({ row, col }) => {
     const formCtx = useContext(FormContext);
@@ -20,23 +23,28 @@ const FormEntry = ({ row, col }) => {
       const { value, error, warning } = InputOptionsSchema.validate(
         formCtx.formOptions[index]
       );
-
-      // TODO: Improve code bellow
-      // Extract few properties, otherwise the defaults
-      const entrySize = formCtx.formOptions[index].cols || 1;
+      
+      const inputFormOptions = R.merge(formCtx.formOptions[index], formOptionDefaultValues);
+      const { 
+        cols: entrySize, 
+        alignX: entryJustifyContent,
+        alignY: entryAlignItems,
+        inputType: entryType,
+        inputProps: entryInputProps,
+        validation: entryValidation,
+        inputLabel: entryInputLabel,
+        dependencies: entryDependencies,
+        showValidation: entryShowValidation,
+        showLabel,
+        labelPosition,
+        labelMarginRight: labelMargin,
+        labelStyle,
+        labelText,
+        margin: entryMargin
+       } = inputFormOptions;
+     
       const divSize = formCtx.colSize * entrySize;
-      const entryJustifyContent = formCtx.formOptions[index].alignX || "center";
-      const entryAlignItems = formCtx.formOptions[index].alignY || "center";
-      const divMargin = formCtx.formOptions[index].margin || formCtx.margin;
-      const entryType = formCtx.formOptions[index].inputType;
-      const entryId = formCtx.formOptions[index].id || index + 1;
-      const entryInputProps = formCtx.formOptions[index].inputProps || {};
-      const entryValidation = formCtx.formOptions[index].validation || {
-        required: "Required",
-      };
-      const entryInputLabel = formCtx.formOptions[index].inputLabel; //|| uuid()
-      const entryDependencies = formCtx.formOptions[index].dependencies || [];
-      const entryShowValidation = formCtx.formOptions[index].showValidation || true;
+      const divMargin = entryMargin || formCtx.margin;
 
       // Schema Validation Error
       if (error) {
@@ -59,13 +67,17 @@ const FormEntry = ({ row, col }) => {
         // const ref = createRef();
         const TypeComponent = formCtx.typesMap[entryType];
         return (
+          <section>
           <Flex
-            flexDirection="column"
+            flexDirection={labelPosition}
             justifyContent={entryJustifyContent}
             alignItems={entryAlignItems}
             key={index}
             style={{ width: `${divSize}px`, margin: divMargin }}
           >
+            
+        {showLabel && (<Flex style={{ marginRight: labelMargin }}><label style={labelStyle}>{labelText}</label></Flex>)}
+            
             <TypeComponent
               onChange={formCtx.handleChange}
               inputRef={formCtx.register({ ...entryValidation })}
@@ -77,6 +89,7 @@ const FormEntry = ({ row, col }) => {
               formCtx.errors[entryInputLabel] &&
               formCtx.errors[entryInputLabel].message}
           </Flex>
+          </section>
         );
         // If TypeMap is not a valid Entry
       } else {
@@ -87,7 +100,7 @@ const FormEntry = ({ row, col }) => {
             key={index}
             style={{ width: `${divSize}px`, margin: divMargin }}
           >
-            <ErrorMessage>{`Undefined 'type' for FormComponent ID: ${entryId}`}</ErrorMessage>
+            <ErrorMessage>{`Undefined 'type' for FormComponent ${entryInputLabel}`}</ErrorMessage>
           </Flex>
         );
       }

@@ -45,5 +45,13 @@ export const InputOptionsSchema = Joi.object({
     // Validation options
     validation: ValidationSchema,
     // Number of cells to spawn the Input
-    cols: Joi.number()
+    cols: Joi.number(),
+    // Position for the Input Label (either Left or Top)
+    labelPosition: Joi.string().valid("row","column"),
+    // Text to be applied to the Input Label
+    labelText: Joi.string(),
+    // Margin Right to be applied to the Input Label
+    labelMarginRight: Joi.string(),
+    // Style to be applied to the Input Label
+    labelStyle: Joi.object()
 });
