@@ -24,7 +24,9 @@ const FormEntry = ({ row, col }) => {
         formCtx.formOptions[index]
       );
       
-      const inputFormOptions = R.merge(formCtx.formOptions[index], formOptionDefaultValues);
+      // Merges Default Values with Input Configurations provided
+      const inputFormOptions = R.merge(formOptionDefaultValues, formCtx.formOptions[index]);
+
       const { 
         cols: entrySize, 
         alignX: entryJustifyContent,

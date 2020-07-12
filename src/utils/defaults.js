@@ -22,6 +22,7 @@ export const formOptionDefaultValues = {
     inputLabel: uuidv4(),
     dependencies: [],
     showValidation: true,
+    showLabel: true,
     labelPosition: LabelPositionEnum.LEFT,
     labelText: "Input Label",
     labelMarginRight: "10px",
