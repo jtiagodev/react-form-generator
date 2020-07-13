@@ -55,11 +55,6 @@ export const defaultTypesMap = {
     render: FormInputs.MuiTextInput,
     inputPropsSchema: schemas.MuiTextInputPropsSchema,
   },
-  MuiTextField: {
-    id: RegisteredInputTypesEnum.MUI_TEXTFIELD,
-    render: FormInputs.MuiTextField,
-    inputPropsSchema: schemas.MuiTextInputPropsSchema,
-  },
   ReactDatePicker: {
     id: RegisteredInputTypesEnum.REACT_DATEPICKER,
     render: FormInputs.ReactDatePicker,
@@ -89,7 +84,6 @@ export const formOptionDefaultValues = {
 };
 
 export const formGeneratorDefaultValues = {
-    
         typesMap: defaultTypesMap,
         colSize: 200,
         rowNum: 2,
@@ -98,5 +92,15 @@ export const formGeneratorDefaultValues = {
         formOptions: testFormOptions,
         enableFooter: true,
         enableFooterButtons: true
-      
 };
+
+export const useFormOptions = {
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    defaultValues: {},
+    resolver: undefined,
+    context: undefined,
+    criteriaMode: "firstErrorDetected",
+    shouldFocusError: true,
+    shouldUnregister: true,
+  };

@@ -54,7 +54,7 @@ export const InputOptionsSchema = Joi.object({
     // List of inputLabel dependencies, which are resetted to "resetValue" when value of the input is changed
     dependencies: Joi.array().items(Joi.string()).required(),
     // Default Value for the input
-    defaultValue: Joi.alternatives(Joi.string(),Joi.bool(),Joi.number()).required(),
+    defaultValue: Joi.alternatives(Joi.string().allow('',null),Joi.bool(),Joi.number()).required(),
     // Value to reset to, as a dependency of another input that changed value
     resetValue: Joi.alternatives(Joi.string().allow('', null),Joi.bool(),Joi.number()).required(),
     // Props to spread in the underlying Input Component

@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 
 export const computeDependencies = (formOptions = []) => {
     let dependenciesMap = {};
@@ -36,3 +37,8 @@ export const computeDefaultValues = (formOptions = []) => {
     console.log(values);
     return values;
 };
+
+export const filterFormOptionsEntryByLabel = (formOptions = [], label) => {
+    const filteredEntries = R.filter((entry) => entry.inputLabel.toLowerCase() === label.toLowerCase(), formOptions);
+    return filteredEntries[0];
+}

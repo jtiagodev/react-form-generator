@@ -1,26 +1,42 @@
 import React, { createRef, useRef, useEffect, useState } from "react";
 import { Flex } from "./Grid";
 import PropTypes from "prop-types";
-import { defaultTypesMap, formGeneratorDefaultValues } from "./utils/defaults";
+import { defaultTypesMap, formGeneratorDefaultValues, useFormOptions } from "./utils/defaults";
 import { testFormOptions } from "./utils/demo";
 import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from "@material-ui/core";
-import { computeDependencies, computeFormValues, computeDefaultValues } from "./utils/form";
+import {
+  computeDependencies,
+  computeFormValues,
+  computeDefaultValues,
+  filterFormOptionsEntryByLabel
+} from "./utils/form";
 import { InputOptionsSchema } from "./utils/schemas";
 import ErrorMessage from "./Form/ErrorMessage";
 import { defaultProps } from "recompose";
 import FormGeneratorRender from "./FormGenerator/FormGeneratorRender";
 import FormEntry from "./FormGenerator/FormEntry";
-import FormContext from './FormGenerator/context';
+import FormContext from "./FormGenerator/context";
 
 const FormGenerator = (props) => {
-  const { typesMap, colSize, rowNum, colNum, formOptions, margin, enableFooter, enableFooterButtons } = props;
+  const {
+    typesMap,
+    colSize,
+    rowNum,
+    colNum,
+    formOptions,
+    margin,
+    enableFooter,
+    enableFooterButtons,
+  } = props;
 
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
-  
-  const [defaultValues, setDefaultValues] = useState(computeDefaultValues(formOptions));
+
+  const [defaultValues, setDefaultValues] = useState(
+    computeDefaultValues(formOptions)
+  );
 
   const {
     watch,
@@ -29,25 +45,28 @@ const FormGenerator = (props) => {
     errors,
     control,
     setValue,
-    reset
-  } = useForm();
+    reset,
+    getValues
+  } = useForm(useFormOptions);
+  const allWatch = watch();
 
   const handleReset = () => {
-    reset(defaultValues)
+    reset(defaultValues);
   };
 
   const handleChange = (event) => {
-    // setFormValues({...formValues, [event.target.id]: event.target.value });
+    // HANDLE DEPENDENCIES
     if (dependenciesMapping[event.target.id]) {
       const fieldsToResetFromDependency = dependenciesMapping[event.target.id];
       fieldsToResetFromDependency.forEach((fieldName) => {
-        setValue(fieldName, "Resetted");
-        handleChange({ target: { id: fieldName } });
+        const formEntry = filterFormOptionsEntryByLabel(formOptions, fieldName);
+        setValue(fieldName, formEntry.defaultValue);
+        handleChange({ target: { id: fieldName } }); // recursive
       });
     }
   };
 
-  const onSubmit = (values) => alert(Object.values(values).toString());
+  const onSubmit = (data) => alert(JSON.stringify(data));
 
   // Aux Row and Cols for Cell Builder with .map
   const rows = [];
@@ -59,29 +78,32 @@ const FormGenerator = (props) => {
     cols.push(i);
   }
 
-
-
   return (
-  <FormContext.Provider value={{
-    formOptions: formOptions,
-    colNum: colNum,
-    colSize: colSize,
-    margin: margin,
-    typesMap: typesMap,
-    handleChange: handleChange,
-    register: register,
-    control: control,
-    errors: errors
-  }}>
-   <FormGeneratorRender 
-   onSubmit={handleSubmit(onSubmit)}
-   rows={rows}
-   cols={cols}
-   enableFooter={enableFooter}
-   enableFooterButtons={enableFooterButtons}
-   onReset={handleReset}
-   />
-   </FormContext.Provider>
+    <FormContext.Provider
+      value={{
+        formOptions: formOptions,
+        colNum: colNum,
+        colSize: colSize,
+        margin: margin,
+        typesMap: typesMap,
+        handleChange: handleChange,
+        register: register,
+        control: control,
+        errors: errors,
+        values: getValues,
+        setValue: setValue,
+        watch: allWatch
+      }}
+    >
+      <FormGeneratorRender
+        onSubmit={handleSubmit(onSubmit)}
+        rows={rows}
+        cols={cols}
+        enableFooter={enableFooter}
+        enableFooterButtons={enableFooterButtons}
+        onReset={handleReset}
+      />
+    </FormContext.Provider>
   );
 };
 
