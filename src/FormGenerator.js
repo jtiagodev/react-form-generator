@@ -2,14 +2,16 @@ import React, { createRef, useRef, useEffect, useState } from "react";
 import { Flex } from "./Grid";
 import PropTypes from "prop-types";
 import { defaultTypesMap, formGeneratorDefaultValues, useFormOptions } from "./utils/defaults";
-import { testFormOptions } from "./utils/demo";
+import { testFormOptions, testFormGeneratorOptions } from "./utils/demo";
 import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from "@material-ui/core";
 import {
   computeDependencies,
   computeFormValues,
   computeDefaultValues,
-  filterFormOptionsEntryByLabel
+  computeDisableWhile,
+  filterFormOptionsEntryByLabel,
+  computeDisabledItems
 } from "./utils/form";
 import { InputOptionsSchema } from "./utils/schemas";
 import ErrorMessage from "./Form/ErrorMessage";
@@ -33,10 +35,15 @@ const FormGenerator = (props) => {
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
+  const [disableWhileMapping, setDisableWhileMapping] = useState(
+    computeDisableWhile(formOptions)
+  );
 
   const [defaultValues, setDefaultValues] = useState(
     computeDefaultValues(formOptions)
   );
+
+  const [disabledItems, setDisabledItems] = useState(computeDisabledItems(formOptions));
 
   const {
     watch,
@@ -46,16 +53,39 @@ const FormGenerator = (props) => {
     control,
     setValue,
     reset,
-    getValues
+    getValues,
+    formState
   } = useForm(useFormOptions);
   const allWatch = watch();
+  const { isDirty, dirtyFields, touched, isSubmitted, isSubmitting, submitCount, isValid } = formState;
 
   const handleReset = () => {
-    reset(defaultValues);
+    reset();
+  };
+
+  const resetValue = (inputLabel, value) => {
+    setValue(inputLabel, value, { shouldDirty: false })
   };
 
   const handleChange = (event) => {
-    // HANDLE DEPENDENCIES
+    // HANDLE DISABLE WITHOUT
+    if (disableWhileMapping[event.target.id]) {
+      const fieldsThatNeedToBeFilledAsDisableDependency = disableWhileMapping[event.target.id];
+      let disableItem = false;
+      fieldsThatNeedToBeFilledAsDisableDependency.forEach((fieldName) => {
+        if (!dirtyFields.hasOwnprops(fieldName)) {
+          disableItem = true;
+        }
+      });
+      if (disableItem) {
+        const newDisabledItems = [...disabledItems];
+        newDisabledItems.push(event.target.id);
+        setDisabledItems(newDisabledItems);
+      }
+      // handleChange({ target: { id: fieldName } }); // recursive
+
+    }
+    // HANDLE DEPENDENCY RESET
     if (dependenciesMapping[event.target.id]) {
       const fieldsToResetFromDependency = dependenciesMapping[event.target.id];
       fieldsToResetFromDependency.forEach((fieldName) => {
@@ -92,7 +122,8 @@ const FormGenerator = (props) => {
         errors: errors,
         values: getValues,
         setValue: setValue,
-        watch: allWatch
+        watch: allWatch,
+        disabledItems
       }}
     >
       <FormGeneratorRender
@@ -102,6 +133,7 @@ const FormGenerator = (props) => {
         enableFooter={enableFooter}
         enableFooterButtons={enableFooterButtons}
         onReset={handleReset}
+        {...testFormGeneratorOptions}
       />
     </FormContext.Provider>
   );

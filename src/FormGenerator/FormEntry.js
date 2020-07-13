@@ -92,6 +92,7 @@ const FormEntry = ({ row, col }) => {
               setValue={formCtx.setValue}
               value={formCtx.watch[entryInputLabel]}
 
+              disabledItems={formCtx.disabledItems}
               id={entryInputLabel}
               onChange={formCtx.handleChange}
               inputRef={formCtx.register({ ...entryValidation })}

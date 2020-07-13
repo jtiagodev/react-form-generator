@@ -50,6 +50,8 @@ export const InputOptionsSchema = Joi.object({
         .required(),
     // Input type to render the Component (must be mapped in typesMapper)
     inputType: Joi.string().default("button").required(),
+    // Disables the Input until the following Input IDs are filled/touched
+    disableWhileNotFilled: Joi.array().items(Joi.string()).required(),
     // TODO: Change to resetWith and add disableWith , rather with dependencies
     // List of inputLabel dependencies, which are resetted to "resetValue" when value of the input is changed
     dependencies: Joi.array().items(Joi.string()).required(),

@@ -21,7 +21,6 @@ export const computeDependencies = (formOptions = []) => {
         })                
     });
 
-    console.log(dependenciesMap);
     return dependenciesMap;
 };
 
@@ -34,7 +33,44 @@ export const computeDefaultValues = (formOptions = []) => {
         values[formOptionLabel] = formOption.default || "default";
     });
 
-    console.log(values);
+    return values;
+};
+
+export const computeDisableWhile = (formOptions = []) => {
+    let disableWhileNotFilledMap = {};
+
+    // keys reset values within array (onChange)
+    formOptions.forEach((formOption) => {
+        const formOptionDependencies = formOption.disableWhileNotFilled;
+        const entryInputLabel = formOption.inputLabel;
+
+        formOptionDependencies.forEach((disabledWhileNotFilledDependency) => {
+            let disableWhileNotFilled = [];
+            let disableWhileNotFilledResult = [];
+            if (disableWhileNotFilledMap[disabledWhileNotFilledDependency]) {
+                disableWhileNotFilled = [...disableWhileNotFilledMap[disabledWhileNotFilledDependency]];
+            } 
+            disableWhileNotFilled.push(entryInputLabel);
+            const disableWhileNotFilledSet = new Set(disableWhileNotFilled);
+            disableWhileNotFilledResult = Array.from(disableWhileNotFilledSet);
+            disableWhileNotFilledMap = { ...disableWhileNotFilledMap, [disabledWhileNotFilledDependency]: disableWhileNotFilledResult };
+        })                
+    });
+
+    return disableWhileNotFilledMap;
+};
+
+// Computes disabled items on startup
+export const computeDisabledItems = (formOptions = []) => {
+    let  values = [];
+
+    formOptions.forEach((formOption) => {
+        const disableWhileNotFilleDependencies = formOption.disableWhileNotFilled;
+        if (disableWhileNotFilleDependencies.length > 0) { // found dependencies
+            values.push(formOption.inputLabel);
+        }
+    });
+
     return values;
 };
 
