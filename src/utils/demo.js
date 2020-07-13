@@ -11,10 +11,10 @@ export const testFormOptions = [
   {
     id: 1,
     inputLabel: "select1",
-    inputType: RegisteredInputTypesEnum.MUI_CHECKBOX,
+    inputType: RegisteredInputTypesEnum.MUI_SELECT,
     dependencies: ["text1"],
     disableWhileNotFilled: [],
-    defaultValue: false,
+    defaultValue: "a",
     resetValue: "",
     inputProps: {
       options: sampleSelectOptions,
