@@ -1,7 +1,7 @@
 
 import Button from "../Form/MuiButton";
 import MuiTextInput from "../Form/MuiTextInput";
-import MuiSelect from "../Form/MuiSelect";
+import MuiSelect from "../Form/MuiSelect-sample";
 import { v4 as uuidv4 } from 'uuid';
 import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 import { testFormOptions } from "../utils/demo";

@@ -36,29 +36,18 @@ export const computeDefaultValues = (formOptions = []) => {
     return values;
 };
 
-export const computeDisableWhile = (formOptions = []) => {
-    let disableWhileNotFilledMap = {};
+// export const computeDisableWhile = (formOptions = []) => {
+//     let disableWhileNotFilledMap = {};
 
-    // keys reset values within array (onChange)
-    formOptions.forEach((formOption) => {
-        const formOptionDependencies = formOption.disableWhileNotFilled;
-        const entryInputLabel = formOption.inputLabel;
+//     // keys reset values within array (onChange)
+//     formOptions.forEach((formOption) => {
+//         const formOptionDependencies = formOption.disableWhileNotFilled;
+//         const entryInputLabel = formOption.inputLabel;
+//         disableWhileNotFilledMap.entryInputLabel = formOptionDependencies;
+//     });
 
-        formOptionDependencies.forEach((disabledWhileNotFilledDependency) => {
-            let disableWhileNotFilled = [];
-            let disableWhileNotFilledResult = [];
-            if (disableWhileNotFilledMap[disabledWhileNotFilledDependency]) {
-                disableWhileNotFilled = [...disableWhileNotFilledMap[disabledWhileNotFilledDependency]];
-            } 
-            disableWhileNotFilled.push(entryInputLabel);
-            const disableWhileNotFilledSet = new Set(disableWhileNotFilled);
-            disableWhileNotFilledResult = Array.from(disableWhileNotFilledSet);
-            disableWhileNotFilledMap = { ...disableWhileNotFilledMap, [disabledWhileNotFilledDependency]: disableWhileNotFilledResult };
-        })                
-    });
-
-    return disableWhileNotFilledMap;
-};
+//     return disableWhileNotFilledMap;
+// };
 
 // Computes disabled items on startup
 export const computeDisabledItems = (formOptions = []) => {
@@ -78,3 +67,31 @@ export const filterFormOptionsEntryByLabel = (formOptions = [], label) => {
     const filteredEntries = R.filter((entry) => entry.inputLabel.toLowerCase() === label.toLowerCase(), formOptions);
     return filteredEntries[0];
 }
+
+export const findAllFieldsWhereInputIsADepedency = (inputLabel, formOptions = []) => {
+    let result = [];
+    formOptions.forEach((inputOption) => {
+        if (inputOption.disableWhileNotFilled.includes(inputLabel)) {
+            result.push(inputOption.inputLabel)
+        }
+    });
+
+    return result;
+}
+
+export const checkIfAllDisableDependenciesAreSatisfied = (disableWhileNotFilled, getValues) => {
+    let dirtyCounter = 0;
+
+    disableWhileNotFilled.forEach((depedency) => {
+        if (getValues(depedency)) {
+            dirtyCounter++;
+        }
+    });
+
+   
+    if (dirtyCounter === disableWhileNotFilled.length) {
+        return true;
+    } else {
+        return false;
+    }
+};

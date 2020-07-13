@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "@material-ui/core";
 
-const Checkbox = ({ name, register, setValue, value, disabledItems, onChange }) => {
+const Checkbox = ({ name, register, setValue, value, disabledItems, onChange, inputLabel }) => {
   const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -12,6 +12,7 @@ const Checkbox = ({ name, register, setValue, value, disabledItems, onChange }) 
     setChecked(checked);
     setValue(name, checked);
     onChange(e);
+
   };
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const Checkbox = ({ name, register, setValue, value, disabledItems, onChange }) 
 
   return (
     <MuiCheckbox
+      id={inputLabel}
       name={name}
       disabled={disabled}
       checked={checked}

@@ -11,10 +11,10 @@ export const testFormOptions = [
   {
     id: 1,
     inputLabel: "select1",
-    inputType: RegisteredInputTypesEnum.MUI_SELECT,
+    inputType: RegisteredInputTypesEnum.MUI_CHECKBOX,
     dependencies: ["text1"],
     disableWhileNotFilled: [],
-    defaultValue: "a",
+    defaultValue: false,
     resetValue: "",
     inputProps: {
       options: sampleSelectOptions,
@@ -30,7 +30,7 @@ export const testFormOptions = [
     inputLabel: "text1",
     inputType: RegisteredInputTypesEnum.MUI_TEXTINPUT,
     dependencies: [],
-    disableWhileNotFilled: ["checkbox1"],
+    disableWhileNotFilled: ["select1", "checkbox1"],
     defaultValue: "Default",
     resetValue: "",
     inputProps: {
@@ -47,7 +47,7 @@ export const testFormOptions = [
     inputLabel: "checkbox1",
     inputType: RegisteredInputTypesEnum.MUI_CHECKBOX,
     disableWhileNotFilled: [],
-    dependencies: ["text1"],
+    dependencies: [],
     defaultValue: false,
     resetValue: false,
     inputProps: {},

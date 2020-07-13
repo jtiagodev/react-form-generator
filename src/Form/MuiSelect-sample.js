@@ -7,13 +7,9 @@ const MuiSelect = (props) => {
   const { inputProps, inputLabel, inputRef, onChange, control } = props;
   
   return (
-
-    
-<Controller
-              name={inputLabel}
-              control={control}
-              render={props => (
-                <Select id={inputLabel} name={inputLabel} onChange={(evt) => onChange(evt)} >
+    <Controller
+      as={
+        <Select onChange={(evt) => onChange(evt)}>
           <MenuItem value="">
             <em>Select an Option</em>
           </MenuItem>
@@ -24,11 +20,13 @@ const MuiSelect = (props) => {
               </MenuItem>
             );
           })}
-        </Select>  
-              )}
-            />
-
-        
+        </Select>
+      }
+      name={inputLabel}
+      rules={{ required: "this is required" }}
+      control={control}
+      defaultValue=""
+    />
   );
 };
 

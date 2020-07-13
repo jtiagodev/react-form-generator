@@ -3,9 +3,9 @@ import React, { forwardRef, useRef, useEffect, useState } from 'react';
 
 const TextInput = (props) => {
     const { name, label = "Label", onChange, inputRef, inputProps, disabledItems, inputLabel } = props;
-    const [disabled, setDisabled] = useState(false);
-
-    
+  
+  // HANDLE DISABLE LOGIC
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     if (disabledItems.includes(name)) {
       setDisabled(true);
