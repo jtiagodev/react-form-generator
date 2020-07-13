@@ -1,3 +1,5 @@
+import { RegisteredInputTypesEnum } from "./enums";
+
 const sampleSelectOptions = [ { label: "a", value: "a" },{ label: "b", value: "b" },{ label: "c", value: "c" }];
 
 // TODO: Convert id / inputLabel to testFormOptions attribute, to assure unique IDs
@@ -5,7 +7,7 @@ export const testFormOptions = [
     {
         id: 1,
         inputLabel: 'select1',
-        inputType: 'select',
+        inputType: RegisteredInputTypesEnum.MUI_SELECT,
         dependencies: ["text1"],
         defaultValue: "Default",
         resetValue: "",
@@ -21,8 +23,13 @@ export const testFormOptions = [
     {
         id: 2,
         inputLabel: 'text1',
-        inputType: 'textInput',
+        inputType: RegisteredInputTypesEnum.MUI_TEXTFIELD,
         dependencies: [],
+        // refData: {
+        //     method: "POST",
+        //     URL: "...",
+        //     lens: "data.cenas.refSelect"
+        // }
         defaultValue: "Default",
         resetValue: "",
         inputProps: {

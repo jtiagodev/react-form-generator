@@ -1,13 +1,34 @@
 import Joi from "@hapi/joi";
 import { v4 as uuidv4 } from 'uuid';
 
+export const MuiAutoCompletePropsSchema = Joi.object().keys({});
+export const MuiButtonPropsSchema = Joi.object().keys({});
+export const MuiCheckboxPropsSchema = Joi.object().keys({});
+export const MuiDatePickerPropsSchema = Joi.object().keys({});
+export const MuiRadioGroupPropsSchema = Joi.object().keys({});
+export const MuiSliderPropsSchema = Joi.object().keys({});
+export const MuiSwitchPropsSchema = Joi.object().keys({});
+export const MuiTextInputPropsSchema = Joi.object().keys({});
+export const ReactDatePickerPropsSchema = Joi.object().keys({});
+export const ReactNumberFormatPropsSchema = Joi.object().keys({});
 
-export const MuiSelectSchema = Joi.object().keys({
+export const MuiSelectPropsSchema = Joi.object().keys({
     // Options to populate Select
     options: Joi.array().items(Joi.object().keys({
         label: Joi.string().required(),
         value: Joi.alternatives(Joi.string(),Joi.number()).required()
     }))
+});
+
+// TODO: Test this
+export const InputRegistrySchema = Joi.object().keys({
+    // Name Identifier
+    id: Joi.object().valid("muiButton", "muiInputText"),
+    // Schema for the specific Input Props (that extend input functionality further)
+    inputPropsSchema: Joi.object(),
+    // Component to Render
+    // TODO: Joi validation for React.Comp
+    render: Joi.any()
 });
 
 export const ValidationSchema = Joi.object().keys({

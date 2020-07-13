@@ -65,9 +65,10 @@ const FormEntry = ({ row, col }) => {
       }
 
       // If TypeMap has a valid Entry
-      if (formCtx.typesMap[entryType]) {
+      // TODO: Add schema validation for input on if
+      if (formCtx.typesMap.hasOwnProperty(entryType)) {
         // const ref = createRef();
-        const TypeComponent = formCtx.typesMap[entryType];
+        const TypeComponent = formCtx.typesMap[entryType].render;
         return (
           <section>
           <Flex
