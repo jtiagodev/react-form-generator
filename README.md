@@ -1,8 +1,12 @@
 ## React Form Accelerator
 ....
 
-### Usage
-....
+### Demo Usage
+```
+npm install
+npm start
+Edit /utils/demo.js configuration
+```
 
 ### FormGenerator
 
