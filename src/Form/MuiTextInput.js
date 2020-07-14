@@ -2,7 +2,7 @@ import { TextField } from '@material-ui/core';
 import React, { forwardRef, useRef, useEffect, useState } from 'react';
 
 const TextInput = (props) => {
-    const { name, label = "Label", onChangeHandler, inputRef, inputProps, disabledItems, inputLabel } = props;
+    const { name, label = "Label", onChangeHandler, inputRef, inputProps, disabledItems, inputLabel, readOnly } = props;
   
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
@@ -23,6 +23,7 @@ const TextInput = (props) => {
         inputProps={{ name: inputLabel }} 
         label={label} 
         inputRef={inputRef} 
+        InputProps={{ readOnly: readOnly ? true : false }}
         />
 
     );

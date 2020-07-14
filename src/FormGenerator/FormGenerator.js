@@ -1,12 +1,14 @@
 import React, { createRef, useRef, useEffect, useState } from "react";
-import { Flex } from "./Grid";
+import { Flex } from "../Form/Grid";
 import PropTypes from "prop-types";
 import {
-  defaultTypesMap,
   formGeneratorDefaultValues,
   useFormOptions,
-} from "./utils/defaults";
-import { testFormOptions, testFormGeneratorOptions } from "./utils/demo";
+} from "../utils/defaults";
+import {
+  defaultTypesMap
+} from "../utils/registry";
+import { testFormOptions, testFormGeneratorOptions } from "../utils/demo";
 import { useForm, useWatch } from "react-hook-form";
 import { Paper, FormGroup, TextField } from "@material-ui/core";
 import {
@@ -18,13 +20,13 @@ import {
   computeDisabledItems,
   findAllFieldsWhereInputIsADepedency,
   checkIfAllDisableDependenciesAreSatisfied,
-} from "./utils/form";
-import { InputOptionsSchema, formGeneratorPropTypesSchema } from "./utils/schemas";
-import ErrorMessage from "./Form/ErrorMessage";
+} from "../utils/form";
+import { InputOptionsSchema, formGeneratorPropTypesSchema } from "../utils/schemas";
+import ErrorMessage from "../Form/ErrorMessage";
 import { defaultProps } from "recompose";
-import FormGeneratorRender from "./FormGenerator/FormGeneratorRender";
-import FormEntry from "./FormGenerator/FormEntry";
-import FormContext from "./FormGenerator/context";
+import FormGeneratorRender from "./FormGeneratorRender";
+import FormEntry from "./FormEntry";
+import FormContext from "./context";
 import * as R from "ramda";
 
 const FormGenerator = (props) => {
@@ -37,6 +39,7 @@ const FormGenerator = (props) => {
     margin,
     enableFooter,
     enableFooterButtons,
+    readOnlyMode
   } = props;
 
   const [dependenciesMapping, setDependenciesMapping] = useState(
@@ -154,6 +157,7 @@ const FormGenerator = (props) => {
         setValue: setValue,
         watch: allWatch,
         disabledItems,
+        readOnlyMode
       }}
     >
       <FormGeneratorRender

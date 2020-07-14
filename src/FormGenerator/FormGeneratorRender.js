@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "./../Grid";
+import { Flex } from "../Form/Grid";
 import FormEntry from "./FormEntry";
 import MuiButton from "./../Form/MuiButton";
 

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import FormContext from "./../FormGenerator/context";
 import { InputOptionsSchema } from "./../utils/schemas";
-import { Flex } from "./../Grid";
+import { Flex } from "../Form/Grid";
 import ErrorMessage from "./../Form/ErrorMessage";
 import { LabelPositionEnum } from "./../utils/enums";
 import { formOptionDefaultValues } from "./../utils/defaults";
@@ -46,6 +46,7 @@ const FormEntry = ({ row, col }) => {
       labelStyle,
       labelText,
       entryStyle,
+      readOnly,
       margin: entryMargin
     } = inputFormOptions;
 
@@ -92,7 +93,7 @@ const FormEntry = ({ row, col }) => {
               name={entryInputLabel}
               setValue={formCtx.setValue}
               value={formCtx.watch[entryInputLabel]}
-
+              readOnly={formCtx.readOnlyMode || readOnly} // if Form has readonlymode it will flag as TRUE. Otherwise will fall back to input form readonly flag
               disabledItems={formCtx.disabledItems}
               id={entryInputLabel}
               onChangeHandler={(evt) => formCtx.handleChange(evt)}

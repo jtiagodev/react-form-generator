@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import FormGenerator from './FormGenerator';
+import FormGenerator from './FormGenerator/FormGenerator';
 
 function App() {
   return (

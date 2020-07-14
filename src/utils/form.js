@@ -36,19 +36,6 @@ export const computeDefaultValues = (formOptions = []) => {
     return values;
 };
 
-// export const computeDisableWhile = (formOptions = []) => {
-//     let disableWhileNotFilledMap = {};
-
-//     // keys reset values within array (onChange)
-//     formOptions.forEach((formOption) => {
-//         const formOptionDependencies = formOption.disableWhileNotFilled;
-//         const entryInputLabel = formOption.inputLabel;
-//         disableWhileNotFilledMap.entryInputLabel = formOptionDependencies;
-//     });
-
-//     return disableWhileNotFilledMap;
-// };
-
 // Computes disabled items on startup
 export const computeDisabledItems = (formOptions = []) => {
     let  values = [];

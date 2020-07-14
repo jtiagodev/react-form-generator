@@ -75,6 +75,7 @@ export const testFormOptions = [
     disableWhileNotFilled: ["select0", "select1", "checkbox1"],
     defaultValue: "Default",
     resetValue: "",
+    readOnly: true,
     inputProps: {
       label: "Botao 2",
     },

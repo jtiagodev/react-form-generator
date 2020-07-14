@@ -85,7 +85,11 @@ export const InputOptionsSchema = Joi.object({
     refDataPayload: Joi.object(),
     refDataLensPath: Joi.array().items(Joi.string()),
     // Styles to be spread to the Flex wrapping the Input Form
-    entryStyle: Joi.object()
+    entryStyle: Joi.object(),
+    // If the component should be readOnly and assume read-only styles
+    readOnly: Joi.bool(),
+    // Styles to be applied to the Input Component when it's in read only mode
+    readOnlyStyles: Joi.object()
 });
 
 export const formGeneratorPropTypesSchema = {
@@ -141,5 +145,8 @@ export const formGeneratorPropTypesSchema = {
      * Styles to be spread to the Form Footer Flex
      */
     styleFormFooter: PropTypes.object,
-  
+    /**
+     * Override all Input Form to behave as Read Only (eg. when you want to use the form as a info table)
+     */
+    readOnlyMode: PropTypes.bool
   };
