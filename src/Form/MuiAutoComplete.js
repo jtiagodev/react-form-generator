@@ -63,6 +63,7 @@ export default function CountrySelect({ onChange, control }) {
         />
       }
       onChange={([event, data]) => {
+        console.log(data);
         return data;
       }}
       name="country"
@@ -71,6 +72,8 @@ export default function CountrySelect({ onChange, control }) {
     />
   );
 }
+
+CountrySelect.whyDidYouRender = true;
 
 // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries = [

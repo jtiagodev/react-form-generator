@@ -1,40 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Flex } from "../Form/Grid";
 import FormEntry from "./FormEntry";
 import MuiButton from "./../Form/MuiButton";
+import MuiAutoComplete from "./../Form/MuiAutoComplete";
+import FormContext from "./context";
+
 
 const FormGeneratorRender = (props) => {
-  const {
-    onSubmit,
-    onReset,
-    rows,
-    cols,
-    enableFooter,
-    enableFooterButtons,
-    styleFormWrapper,
-    styleFormBody,
-    styleFormFooter
-  } = props;
+
+  const formCtx = useContext(FormContext);
+
 
   return (
-    <Flex style={styleFormWrapper}>
-    <form onSubmit={onSubmit}>
-      <Flex style={styleFormBody} flexDirection="column">
-        {rows.map((row, i) => (
+    <Flex style={formCtx.styleFormWrapper}>
+    <form onSubmit={formCtx.handleSubmit(formCtx.onSubmit)}>
+
+      <Flex style={formCtx.styleFormBody} flexDirection="column">
+        {formCtx.rows.map((row, i) => (
           <Flex flexWrap="wrap" flexDirection="row" key={i}>
-            {cols.map((col, j) => (
+            {formCtx.cols.map((col, j) => (
               <FormEntry row={i} col={j} />
             ))}
           </Flex>
         ))}
       </Flex>
       <input style={{ display: "none" }} type="submit" />
-      {enableFooter && (
-        <Flex style={styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
-          {enableFooterButtons && (
+      {formCtx.enableFooter && (
+        <Flex style={formCtx.styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
+          {formCtx.enableFooterButtons && (
             <>
-              <MuiButton onClick={onSubmit} text="Submit" />
-              <MuiButton onClick={() => onReset()} text="Clear" />
+              <MuiButton onClick={() => alert("SUBMIT")} text="Submit" />
+              <MuiButton onClick={() => alert("RESET")} text="Clear" />
             </>
           )}
         </Flex>
@@ -45,3 +41,6 @@ const FormGeneratorRender = (props) => {
 };
 
 export default FormGeneratorRender;
+
+FormGeneratorRender.whyDidYouRender = true;
+

@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@welldone-software/why-did-you-render": "^4.2.5",
     "axios": "^0.19.2",
     "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
@@ -30,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docgen-sample": "./node_modules/.bin/react-docgen ./src/FormGenerator.js"
+    "docgen-sample": "./node_modules/.bin/react-docgen ./src/utils/schemas.js"
   },
   "eslintConfig": {
     "extends": "react-app"

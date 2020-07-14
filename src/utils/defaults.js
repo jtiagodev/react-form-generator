@@ -10,7 +10,7 @@ import {defaultTypesMap} from './registry';
 
 export const formOptionDefaultValues = {
     cols: 1,
-    alignX: "center",
+    alignX: "flex-start",
     alignY: "center",
     inputProps: {},
     validation: { required: "Required" },

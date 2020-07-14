@@ -64,7 +64,7 @@ const FormEntry = ({ row, col }) => {
           key={index}
           style={{ width: `${divSize}px`, margin: divMargin, ...entryStyle }}
         >
-          <ErrorMessage>Invalid Input Object</ErrorMessage>
+          <ErrorMessage>Invalid Schema</ErrorMessage>
           <ErrorMessage>{error.toString()}</ErrorMessage>
         </Flex>
       );
