@@ -9,11 +9,28 @@ const sampleSelectOptions = [
 // TODO: Convert id / inputLabel to testFormOptions attribute, to assure unique IDs
 export const testFormOptions = [
   {
-    id: 1,
-    inputLabel: "select1",
+    id: 0,
+    inputLabel: "select0",
     inputType: RegisteredInputTypesEnum.MUI_SELECT,
     dependencies: ["text1"],
     disableWhileNotFilled: [],
+    defaultValue: "a",
+    resetValue: "",
+    inputProps: {
+      options: sampleSelectOptions,
+    },
+    margin: "0px 0px 10px 0px",
+    showValidation: true,
+    validation: {
+      validate: (value) => value !== "admin" || "Nice try!",
+    },
+  },
+  {
+    id: 1,
+    inputLabel: "select1",
+    inputType: RegisteredInputTypesEnum.MUI_SELECT,
+    dependencies: [],
+    disableWhileNotFilled: ["select0"],
     defaultValue: "a",
     resetValue: "",
     inputProps: {
@@ -30,7 +47,7 @@ export const testFormOptions = [
     inputLabel: "text1",
     inputType: RegisteredInputTypesEnum.MUI_TEXTINPUT,
     dependencies: [],
-    disableWhileNotFilled: ["select1", "checkbox1"],
+    disableWhileNotFilled: ["select0", "select1", "checkbox1"],
     defaultValue: "Default",
     resetValue: "",
     inputProps: {

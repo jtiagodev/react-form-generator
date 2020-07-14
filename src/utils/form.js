@@ -82,8 +82,8 @@ export const findAllFieldsWhereInputIsADepedency = (inputLabel, formOptions = []
 export const checkIfAllDisableDependenciesAreSatisfied = (disableWhileNotFilled, getValues) => {
     let dirtyCounter = 0;
 
-    disableWhileNotFilled.forEach((depedency) => {
-        if (getValues(depedency)) {
+    disableWhileNotFilled.forEach((dependency) => {
+        if (getValues(dependency) && getValues(dependency) !== "") {
             dirtyCounter++;
         }
     });

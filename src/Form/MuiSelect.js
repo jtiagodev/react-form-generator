@@ -4,25 +4,31 @@ import { Select, MenuItem } from "@material-ui/core";
 import { useForm, ErrorMessage, Controller } from "react-hook-form";
 
 const MuiSelect = (props) => {
-  const { inputProps, inputLabel, inputRef, onChange, control, register } = props;
-  
-  return (
+  const { inputProps, inputLabel, inputRef, onChangeHandler, control } = props;
 
-    <Select 
-      inputProps={{ 
-      name: inputLabel, 
-      inputRef: (ref) => {
-        if (!ref) return;
-        register({ name: inputLabel, value: ref.value });
-      }}}
-      onChange={onChange}
-    >
-      {inputProps.options.map((item, i) => (
-        <MenuItem key={i} value={item.value}>
-          {item.label}
-        </MenuItem>
-      ))}
-    </Select>
+  return (
+    <Controller
+    render={({ onChange, onBlur, value}) => (
+      <Select inputProps={{ name: inputLabel }} onChange={(evt) => { onChange(evt); onChangeHandler(evt) }} >
+          <MenuItem value="">
+            <em>Select an Option</em>
+          </MenuItem>
+          {inputProps.options.map((option, i) => {
+            return (
+              <MenuItem key={i} value={option.value}>
+                {option.label}
+              </MenuItem>
+            );
+          })}
+        </Select>
+    )}
+        
+      
+      name={inputLabel}
+      rules={{ required: "this is required" }}
+      control={control}
+      defaultValue=""
+    />
   );
 };
 
