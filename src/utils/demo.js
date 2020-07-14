@@ -1,4 +1,4 @@
-import { RegisteredInputTypesEnum } from "./enums";
+import { RegisteredInputTypesEnum, RefDataMethodsEnum } from "./enums";
 
 const sampleSelectOptions = [
   { label: "Label A", value: "a" },
@@ -24,6 +24,11 @@ export const testFormOptions = [
     validation: {
       validate: (value) => value !== "admin" || "Nice try!",
     },
+    useRefDataLoader: false,
+    refDataMethod: RefDataMethodsEnum.GET,
+    refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
+    refDataPayload: {},
+    refDataLensPath: ['data','ref','select0']
   },
   {
     id: 1,

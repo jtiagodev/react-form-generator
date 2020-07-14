@@ -17,3 +17,8 @@ export const RegisteredInputTypesEnum = {
     REACT_DATEPICKER: 'ReactDatePicker',
     REACT_NUMBERFORMAT: 'ReactNumberFormat'
 };
+
+export const RefDataMethodsEnum = {
+    POST: 'post',
+    GET: 'get'
+}

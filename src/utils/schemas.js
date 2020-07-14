@@ -76,5 +76,11 @@ export const InputOptionsSchema = Joi.object({
     // Margin Right to be applied to the Input Label
     labelMarginRight: Joi.string(),
     // Style to be applied to the Input Label
-    labelStyle: Joi.object()
+    labelStyle: Joi.object(),
+    // Ref Data to be fetched on Input load
+    useRefDataLoader: Joi.bool(),
+    refDataMethod: Joi.string(),
+    refDataURL: Joi.string(),
+    refDataPayload: Joi.object(),
+    refDataLensPath: Joi.array().items(Joi.string())
 });
