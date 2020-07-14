@@ -12,7 +12,7 @@ import * as schemas from "../utils/schemas";
 export const defaultTypesMap = {
   MuiAutoComplete: {
     id: RegisteredInputTypesEnum.MUI_AUTOCOMPLETE,
-    render: FormInputs.MuiButton,
+    render: FormInputs.MuiAutoComplete,
     inputPropsSchema: schemas.MuiAutoCompletePropsSchema
   },
   MuiButton: {
