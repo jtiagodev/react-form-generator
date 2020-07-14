@@ -8,27 +8,27 @@ import { formOptionDefaultValues } from "./../utils/defaults";
 import * as R from "ramda";
 import MuiAutoComplete from "../Form/MuiAutoComplete";
 
-const FormEntry = ({ row, col }) => {
-  const formCtx = useContext(FormContext);
+const FormEntry = (props) => {
+  const { row, col, colNum, formOptions, colSize, margin, typesMap } = props;
 
   // Calculate which FormEntry to be rendered
   let index;
   if (row === 0) {
     index = row + col;
   } else {
-    index = row * formCtx.colNum + col;
+    index = row * colNum + col;
   }
 
-  if (formCtx.formOptions[index]) {
+  if (formOptions[index]) {
     // Validate Schema for the provided Form Entry
     const { value, error, warning } = InputOptionsSchema.validate(
-      formCtx.formOptions[index]
+      formOptions[index]
     );
 
     // Merges Default Values with Input Configurations provided
     const inputFormOptions = R.merge(
       formOptionDefaultValues,
-      formCtx.formOptions[index]
+      formOptions[index]
     );
 
     const {
@@ -51,8 +51,8 @@ const FormEntry = ({ row, col }) => {
       margin: entryMargin
     } = inputFormOptions;
 
-    const divSize = formCtx.colSize * entrySize;
-    const divMargin = entryMargin || formCtx.margin;
+    const divSize = colSize * entrySize;
+    const divMargin = entryMargin || margin;
 
     // Schema Validation Error
     if (error) {
@@ -72,8 +72,8 @@ const FormEntry = ({ row, col }) => {
 
     // If TypeMap has a valid Entry
     // TODO: Add schema validation for input on if
-    if (formCtx.typesMap.hasOwnProperty(entryType)) {
-      const TypeComponent = formCtx.typesMap[entryType].render;
+    if (typesMap.hasOwnProperty(entryType)) {
+      const TypeComponent = typesMap[entryType].render;
       return (
         <section>
           <Flex
@@ -88,10 +88,8 @@ const FormEntry = ({ row, col }) => {
                 <label style={labelStyle}>{labelText}</label>
               </Flex>
             )}
-            {formCtx.typesMap[entryType].name === "MuiAutoComplete" && (
-              <MuiAutoComplete control={formCtx.control} />
-            )}
-            {formCtx.typesMap[entryType].name !== "MuiAutoComplete" && (
+            <TypeComponent />
+            {/* {formCtx.typesMap[entryType].name !== "MuiAutoComplete" && (
               <TypeComponent
               register={formCtx.register}
               name={entryInputLabel}
@@ -106,11 +104,9 @@ const FormEntry = ({ row, col }) => {
               inputProps={entryInputProps}
               control={formCtx.control}
             />
-              )}
-            
-            {entryShowValidation &&
-              formCtx.errors[entryInputLabel] &&
-              formCtx.errors[entryInputLabel].message}
+              )} */}
+            {/* <ErrorDisplay /> */}
+           
           </Flex>
         </section>
       );

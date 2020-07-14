@@ -1,9 +1,13 @@
 /* eslint-disable no-use-before-define */
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
 import { Controller } from "react-hook-form";
+import { useWhyDidYouUpdate } from "./../utils/react";
+
+import FormContext from "./../FormGenerator/context";
+
 
 // ISO 3166-1 alpha-2
 // ⚠️ No support for IE 11
@@ -27,8 +31,13 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CountrySelect({ onChange, control }) {
+export default function CountrySelect(props) {
   const classes = useStyles();
+
+  const formCtx = useContext(FormContext);
+
+  useWhyDidYouUpdate("CountrySelect", props);
+
 
   return (
     <Controller
@@ -67,7 +76,7 @@ export default function CountrySelect({ onChange, control }) {
         return data;
       }}
       name="country"
-      control={control}
+      control={formCtx.control}
       defaultValue={{ code: "AF", label: "Afghanistan", phone: "93" }}
     />
   );

@@ -1,35 +1,66 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Flex } from "../Form/Grid";
 import FormEntry from "./FormEntry";
 import MuiButton from "./../Form/MuiButton";
 import MuiAutoComplete from "./../Form/MuiAutoComplete";
 import FormContext from "./context";
+import { useWhyDidYouUpdate } from "./../utils/react";
 
 
 const FormGeneratorRender = (props) => {
+  const {
+    typesMap,
+    colSize,
+    rowNum,
+    colNum,
+    formOptions,
+    margin,
+    enableFooter,
+    enableFooterButtons,
+    readOnlyMode,
+    styleFormWrapper,
+    styleFormBody,
+    styleFormFooter,
+    children,
+    handleSubmit
+  } = props;
+  
+  const computeArray = (count) => {
+    const res = [];
+    for (var i = 0; i < count; i++) {
+      res.push(i);
+    }
+    return res;
+  };
 
-  const formCtx = useContext(FormContext);
+  // Aux Row and Cols for Cell Builder with .map
+  const [rows, setRows] = useState(computeArray(rowNum));
+  const [cols, setCols] = useState(computeArray(colNum));
+  const onSubmitHandler = (data) => alert(JSON.stringify(data));
+
+  
+  useWhyDidYouUpdate("FormGeneratorRender", props);
 
 
   return (
-    <Flex style={formCtx.styleFormWrapper}>
-    <form onSubmit={formCtx.handleSubmit(formCtx.onSubmit)}>
+    <Flex style={styleFormWrapper}>
+    <form onSubmit={handleSubmit(onSubmitHandler)}>
 
-      <Flex style={formCtx.styleFormBody} flexDirection="column">
-        {formCtx.rows.map((row, i) => (
+      <Flex style={styleFormBody} flexDirection="column">
+        {rows.map((row, i) => (
           <Flex flexWrap="wrap" flexDirection="row" key={i}>
-            {formCtx.cols.map((col, j) => (
-              <FormEntry row={i} col={j} />
+            {cols.map((col, j) => (
+              <FormEntry row={i} col={j} {...props} />
             ))}
           </Flex>
         ))}
       </Flex>
       <input style={{ display: "none" }} type="submit" />
-      {formCtx.enableFooter && (
-        <Flex style={formCtx.styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
-          {formCtx.enableFooterButtons && (
+      {enableFooter && (
+        <Flex style={styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
+          {enableFooterButtons && (
             <>
-              <MuiButton onClick={() => alert("SUBMIT")} text="Submit" />
+              <MuiButton onClick={() => alert("RESET")} text="Submit" />
               <MuiButton onClick={() => alert("RESET")} text="Clear" />
             </>
           )}
