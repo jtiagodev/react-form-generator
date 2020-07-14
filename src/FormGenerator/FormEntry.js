@@ -6,6 +6,7 @@ import ErrorMessage from "./../Form/ErrorMessage";
 import { LabelPositionEnum } from "./../utils/enums";
 import { formOptionDefaultValues } from "./../utils/defaults";
 import * as R from "ramda";
+import MuiAutoComplete from "../Form/MuiAutoComplete";
 
 const FormEntry = ({ row, col }) => {
   const formCtx = useContext(FormContext);
@@ -87,8 +88,11 @@ const FormEntry = ({ row, col }) => {
                 <label style={labelStyle}>{labelText}</label>
               </Flex>
             )}
-
-            <TypeComponent
+            {formCtx.typesMap[entryType].name === "MuiAutoComplete" && (
+              <MuiAutoComplete control={formCtx.control} />
+            )}
+            {formCtx.typesMap[entryType].name !== "MuiAutoComplete" && (
+              <TypeComponent
               register={formCtx.register}
               name={entryInputLabel}
               setValue={formCtx.setValue}
@@ -102,6 +106,8 @@ const FormEntry = ({ row, col }) => {
               inputProps={entryInputProps}
               control={formCtx.control}
             />
+              )}
+            
             {entryShowValidation &&
               formCtx.errors[entryInputLabel] &&
               formCtx.errors[entryInputLabel].message}

@@ -39,6 +39,15 @@
       "sourceMaps": "client"
     },
     {
+      "name": "Launch Chrome against localhost",
+      "type": "chrome",
+      "request": "launch",
+      "port": 9222,
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true
+    },
+    {
       "name": "Attach Chrome against localhost",
       "type": "chrome",
       "request": "attach",

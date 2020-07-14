@@ -5,13 +5,13 @@ import { sampleSelectOptions, countries } from './demo-lov';
 export const testFormOptions = [
   {
     id: 10,
-    inputLabel: "select10",
+    inputLabel: "autocomplete1",
     labelText: "Auto Complete Test",
     inputType: RegisteredInputTypesEnum.MUI_AUTOCOMPLETE,
     dependencies: [],
     cols: 3,
     disableWhileNotFilled: [],
-    defaultValue: countries[0].code,
+    defaultValue: "",
     resetValue: "",
     inputProps: {
       options: countries,

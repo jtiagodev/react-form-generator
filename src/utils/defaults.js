@@ -41,12 +41,12 @@ export const formGeneratorDefaultValues = {
 };
 
 export const useFormOptions = {
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: "firstErrorDetected",
-    shouldFocusError: true,
-    shouldUnregister: true,
+    // mode: 'onSubmit',
+    // reValidateMode: 'onChange',
+    // defaultValues: {},
+    // resolver: undefined,
+    // context: undefined,
+    // criteriaMode: "firstErrorDetected",
+    // shouldFocusError: true,
+    // shouldUnregister: true,
   };

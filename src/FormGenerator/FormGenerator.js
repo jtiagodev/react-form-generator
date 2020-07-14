@@ -85,6 +85,8 @@ const FormGenerator = (props) => {
   };
 
   const handleChange = (event) => {
+    console.log(event);
+    
     // HANDLE DISABLE WITHOUT
     const fieldsDependingOnCurrentChangedInput = findAllFieldsWhereInputIsADepedency(
       event.target.id || event.target.name,
