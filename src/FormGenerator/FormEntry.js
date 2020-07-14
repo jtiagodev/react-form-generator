@@ -45,6 +45,7 @@ const FormEntry = ({ row, col }) => {
       labelMarginRight: labelMargin,
       labelStyle,
       labelText,
+      entryStyle,
       margin: entryMargin
     } = inputFormOptions;
 
@@ -59,7 +60,7 @@ const FormEntry = ({ row, col }) => {
           justifyContent={entryJustifyContent}
           alignItems={entryAlignItems}
           key={index}
-          style={{ width: `${divSize}px`, margin: divMargin }}
+          style={{ width: `${divSize}px`, margin: divMargin, ...entryStyle }}
         >
           <ErrorMessage>Invalid Input Object</ErrorMessage>
           <ErrorMessage>{error.toString()}</ErrorMessage>

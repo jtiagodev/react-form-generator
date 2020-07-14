@@ -1,20 +1,40 @@
 import { RegisteredInputTypesEnum, RefDataMethodsEnum } from "./enums";
-
-const sampleSelectOptions = [
-  { label: "Label A", value: "a" },
-  { label: "Label B", value: "b" },
-  { label: "Label C", value: "c" },
-];
+import { sampleSelectOptions, countries } from './demo-lov';
 
 // TODO: Convert id / inputLabel to testFormOptions attribute, to assure unique IDs
 export const testFormOptions = [
+  {
+    id: 10,
+    inputLabel: "select10",
+    labelText: "Auto Complete Test",
+    inputType: RegisteredInputTypesEnum.MUI_AUTOCOMPLETE,
+    dependencies: [],
+    cols: 3,
+    disableWhileNotFilled: [],
+    defaultValue: countries[0].code,
+    resetValue: "",
+    inputProps: {
+      options: countries,
+    },
+    margin: "0px 0px 10px 0px",
+    showValidation: true,
+    validation: {
+      validate: (value) => value !== "admin" || "Nice try!",
+    },
+    useRefDataLoader: false,
+    refDataMethod: RefDataMethodsEnum.GET,
+    refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
+    refDataPayload: {},
+    refDataLensPath: ['data','ref','select0'],
+    entryStyle: {}
+  },
   {
     id: 0,
     inputLabel: "select0",
     inputType: RegisteredInputTypesEnum.MUI_SELECT,
     dependencies: ["text1"],
     disableWhileNotFilled: [],
-    defaultValue: "a",
+    defaultValue: sampleSelectOptions[0].value,
     resetValue: "",
     inputProps: {
       options: sampleSelectOptions,
@@ -81,4 +101,7 @@ export const testFormOptions = [
   },
 ];
 
-export const testFormGeneratorOptions = {};
+export const testFormGeneratorOptions = {
+
+};
+

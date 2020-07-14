@@ -19,7 +19,7 @@ import {
   findAllFieldsWhereInputIsADepedency,
   checkIfAllDisableDependenciesAreSatisfied,
 } from "./utils/form";
-import { InputOptionsSchema } from "./utils/schemas";
+import { InputOptionsSchema, formGeneratorPropTypesSchema } from "./utils/schemas";
 import ErrorMessage from "./Form/ErrorMessage";
 import { defaultProps } from "recompose";
 import FormGeneratorRender from "./FormGenerator/FormGeneratorRender";
@@ -169,49 +169,6 @@ const FormGenerator = (props) => {
   );
 };
 
-FormGenerator.propTypes = {
-  /**
-   * Maximum Width of the Form Container
-   */
-  maxWidth: PropTypes.string,
-  /**
-   * Maximum Height of the Form Container
-   */
-  maxHeight: PropTypes.string,
-  /**
-   * (Advanced usage) Mapping the supported types of Form Inputs provided to the Form Generator
-   */
-  typesMap: PropTypes.object,
-  /**
-   * Size for a column (in pixels)
-   */
-  colSize: PropTypes.number,
-  /**
-   * Amount of Rows on the form
-   */
-  rowNum: PropTypes.number,
-  /**
-   * Amount fo Columns on the form
-   */
-  colNum: PropTypes.number,
-  /**
-   * Form elements definition
-   */
-  formOptions: testFormOptions,
-  /**
-   * Default magins applied to each cell
-   */
-  margin: PropTypes.number,
-  /**
-   * Enable Form Footer
-   */
-  enableFooter: PropTypes.bool,
-  /**
-   * Enable Default Footer Buttons
-   */
-  enableFooterButtons: PropTypes.bool,
-};
-
+FormGenerator.propTypes = formGeneratorPropTypesSchema;
 const withDefaultProps = defaultProps(formGeneratorDefaultValues);
-
 export default withDefaultProps(FormGenerator);

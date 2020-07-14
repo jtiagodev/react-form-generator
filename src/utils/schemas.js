@@ -1,5 +1,6 @@
 import Joi from "@hapi/joi";
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 export const MuiAutoCompletePropsSchema = Joi.object().keys({});
 export const MuiButtonPropsSchema = Joi.object().keys({});
@@ -82,5 +83,63 @@ export const InputOptionsSchema = Joi.object({
     refDataMethod: Joi.string(),
     refDataURL: Joi.string(),
     refDataPayload: Joi.object(),
-    refDataLensPath: Joi.array().items(Joi.string())
+    refDataLensPath: Joi.array().items(Joi.string()),
+    // Styles to be spread to the Flex wrapping the Input Form
+    entryStyle: Joi.object()
 });
+
+export const formGeneratorPropTypesSchema = {
+    /**
+     * Maximum Width of the Form Container
+     */
+    maxWidth: PropTypes.string,
+    /**
+     * Maximum Height of the Form Container
+     */
+    maxHeight: PropTypes.string,
+    /**
+     * (Advanced usage) Mapping the supported types of Form Inputs provided to the Form Generator
+     */
+    typesMap: PropTypes.object,
+    /**
+     * Size for a column (in pixels)
+     */
+    colSize: PropTypes.number,
+    /**
+     * Amount of Rows on the form
+     */
+    rowNum: PropTypes.number,
+    /**
+     * Amount fo Columns on the form
+     */
+    colNum: PropTypes.number,
+    /**
+     * Form elements definition
+     */
+    formOptions: PropTypes.array,
+    /**
+     * Default magins applied to each cell
+     */
+    margin: PropTypes.number,
+    /**
+     * Enable Form Footer
+     */
+    enableFooter: PropTypes.bool,
+    /**
+     * Enable Default Footer Buttons
+     */
+    enableFooterButtons: PropTypes.bool,
+    /**
+     * Styles to be spread to the Form Wrapper Flex
+     */
+    styleFormWrapper: PropTypes.object,
+    /**
+     * Styles to be spread to the Form Body Flex
+     */
+    styleFormBody: PropTypes.object,
+    /**
+     * Styles to be spread to the Form Footer Flex
+     */
+    styleFormFooter: PropTypes.object,
+  
+  };

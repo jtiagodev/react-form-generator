@@ -87,11 +87,14 @@ export const formGeneratorDefaultValues = {
         typesMap: defaultTypesMap,
         colSize: 200,
         rowNum: 2,
-        colNum: 2,
+        colNum: 5,
         margin: "5px",
         formOptions: testFormOptions,
         enableFooter: true,
-        enableFooterButtons: true
+        enableFooterButtons: true,
+        styleFormWrapper: {},
+        styleFormBody: {},
+        styleFormFooter: {}
 };
 
 export const useFormOptions = {

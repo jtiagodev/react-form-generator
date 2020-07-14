@@ -11,11 +11,15 @@ const FormGeneratorRender = (props) => {
     cols,
     enableFooter,
     enableFooterButtons,
+    styleFormWrapper,
+    styleFormBody,
+    styleFormFooter
   } = props;
 
   return (
+    <Flex style={styleFormWrapper}>
     <form onSubmit={onSubmit}>
-      <Flex flexDirection="column">
+      <Flex style={styleFormBody} flexDirection="column">
         {rows.map((row, i) => (
           <Flex flexWrap="wrap" flexDirection="row" key={i}>
             {cols.map((col, j) => (
@@ -26,7 +30,7 @@ const FormGeneratorRender = (props) => {
       </Flex>
       <input style={{ display: "none" }} type="submit" />
       {enableFooter && (
-        <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
+        <Flex style={styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
           {enableFooterButtons && (
             <>
               <MuiButton onClick={onSubmit} text="Submit" />
@@ -36,6 +40,7 @@ const FormGeneratorRender = (props) => {
         </Flex>
       )}
     </form>
+    </Flex>
   );
 };
 
