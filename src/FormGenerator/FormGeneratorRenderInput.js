@@ -7,6 +7,7 @@ import { LabelPositionEnum } from "../utils/enums";
 import { formOptionDefaultValues } from "../utils/defaults";
 import * as R from "ramda";
 import MuiAutoComplete from "../Form/MuiAutoComplete";
+import ErrorDisplay from "./../FormGenerator/ErrorDisplay";
 
 const FormEntry = (props) => {
   const { row, col, colNum, formOptions, colSize, margin, typesMap } = props;
@@ -75,11 +76,13 @@ const FormEntry = (props) => {
             )}
             {typesMap[inputFormOptions.inputType].name !==
               "MuiAutoComplete" && (
+                <>
               <InputTypeComponent
                 inputFormOptions={inputFormOptions}
                 name={inputFormOptions.inputLabel}
-                
               />
+              <ErrorDisplay name={inputFormOptions.inputLabel} showValidation={inputFormOptions.showValidation} />
+              </>
             )}
           </Flex>
         </section>
