@@ -9,7 +9,10 @@ export const MuiDatePickerPropsSchema = Joi.object().keys({});
 export const MuiRadioGroupPropsSchema = Joi.object().keys({});
 export const MuiSliderPropsSchema = Joi.object().keys({});
 export const MuiSwitchPropsSchema = Joi.object().keys({});
-export const MuiTextInputPropsSchema = Joi.object().keys({});
+export const MuiTextInputPropsSchema = Joi.object().keys({
+    labelDisplay: Joi.bool(),
+    labelText: Joi.string()
+});
 export const ReactDatePickerPropsSchema = Joi.object().keys({});
 export const ReactNumberFormatPropsSchema = Joi.object().keys({});
 
@@ -40,10 +43,6 @@ export const ValidationSchema = Joi.object().keys({
 });
 
 export const InputOptionsSchema = Joi.object({
-    // TODO: Add refData source, for populating onLoad
-    // Identifier
-    id: Joi.alternatives(Joi.string(), Joi.number())
-        .required(),
     // Label to Identify Value Field within Form
     inputLabel: Joi.string()
         .alphanum()
@@ -55,7 +54,7 @@ export const InputOptionsSchema = Joi.object({
     inputType: Joi.string().default("button").required(),
     // Disables the Input until the following Input IDs are filled/touched
     disableWhileNotFilled: Joi.array().items(Joi.string()).required(),
-    // TODO: Change to resetWith and add disableWith , rather with dependencies
+    // TODO: Change to resetWith
     // List of inputLabel dependencies, which are resetted to "resetValue" when value of the input is changed
     dependencies: Joi.array().items(Joi.string()).required(),
     // Default Value for the input
@@ -72,6 +71,8 @@ export const InputOptionsSchema = Joi.object({
     validation: ValidationSchema,
     // Number of cells to spawn the Input
     cols: Joi.number(),
+    // Should display label on the input form
+    labelDisplay: Joi.bool(),
     // Position for the Input Label (either Left or Top)
     labelPosition: Joi.string().valid("row","column"),
     // Text to be applied to the Input Label

@@ -7,38 +7,35 @@ const Checkbox = (props) => {
   const { inputFormOptions, name } = props;
 
   const formCtx = useContext(FormContext);
-  const onChangeHandler = (evt) => formCtx.handleChange(evt);
 
   const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const handleChange = (e) => {
     const checked = e.target.checked;
-
     setChecked(checked);
-    formCtx.setValue(inputFormOptions.inputLabel, checked);
-    onChangeHandler(e);
-
+    formCtx.setValue(name, checked);
+    formCtx.handleChange(name, e.target.checked);
   };
 
   useEffect(() => {
-    formCtx.register({ name: inputFormOptions.inputLabel });
-  }, [inputFormOptions.inputLabel, formCtx]);
+    formCtx.register({ name: name });
+  }, [name, formCtx]);
 
   useEffect(() => {
-    if (formCtx.disabledItems.includes(inputFormOptions.inputLabel)) {
+    if (formCtx.disabledItems.includes(name)) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [formCtx.disabledItems, inputFormOptions.inputLabel]);
+  }, [formCtx.disabledItems, name]);
 
   useEffect(() => {
-    if (formCtx.watch[inputFormOptions.inputLabel] !== checked) {
-      setChecked(formCtx.watch[inputFormOptions.inputLabel]);
-      formCtx.setValue(inputFormOptions.inputLabel, formCtx.watch[inputFormOptions.inputLabel]);
+    if (formCtx.watch[name] !== checked) {
+      setChecked(formCtx.watch[name]);
+      formCtx.setValue(name, formCtx.watch[name]);
     }
-  }, [inputFormOptions.inputLabel, formCtx, setChecked, formCtx.setValue]);
+  }, [name, formCtx, checked]);
 
   return (    
     <MuiCheckbox

@@ -78,6 +78,7 @@ const FormEntry = (props) => {
               <InputTypeComponent
                 inputFormOptions={inputFormOptions}
                 name={inputFormOptions.inputLabel}
+                
               />
             )}
           </Flex>

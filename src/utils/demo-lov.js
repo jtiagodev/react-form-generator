@@ -5,6 +5,17 @@ export const sampleSelectOptions = [
     { label: "Label C", value: "c" },
   ];
   
+  export const countryToFlag = (isoCode) => {
+    return typeof String.fromCodePoint !== "undefined"
+      ? isoCode
+          .toUpperCase()
+          .replace(/./g, char =>
+            String.fromCodePoint(char.charCodeAt(0) + 127397)
+          )
+      : isoCode;
+  }
+  
+
 export const countries = [
     { code: "AD", label: "Andorra", phone: "376" },
     { code: "AE", label: "United Arab Emirates", phone: "971" },

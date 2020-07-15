@@ -18,6 +18,7 @@ export const formOptionDefaultValues = {
     dependencies: [],
     showValidation: true,
     showLabel: true,
+    labelDisplay: true,
     labelPosition: LabelPositionEnum.LEFT,
     labelText: "Input Label",
     labelMarginRight: "10px",

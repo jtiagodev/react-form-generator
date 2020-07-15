@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import * as R from 'ramda';
-
 import { Select, MenuItem } from "@material-ui/core";
 import { useForm, ErrorMessage, Controller } from "react-hook-form";
-import Axios from "axios";
+import FormContext from "./../FormGenerator/context";
 
 const MuiSelect = (props) => {
-  const { inputProps, inputLabel, inputRef, onChangeHandler, control } = props;
+  const { inputFormOptions, name } = props;
+  const formCtx = useContext(FormContext);
+
+
 
   // REF DATA HANDLER
   const [refData, setRefData] = useState(() => {
-   if (!props.useRefDataLoader && inputProps.options) {
-    return inputProps.options;
+   if (!inputFormOptions.useRefDataLoader && inputFormOptions.inputProps.options) {
+    return inputFormOptions.inputProps.options;
    } else {
      return [];
    }
   });
   useEffect(() => {
-    if (props.useRefDataLoader) {
+    if (inputFormOptions.useRefDataLoader) {
       axios({
-        method: props.refDataMethod,
-        url: props.refDataURL,
-        data: props.refDataPayload
+        method: inputFormOptions.refDataMethod,
+        url: inputFormOptions.refDataURL,
+        data: inputFormOptions.refDataPayload
       }).then((response) => {
-        const dataLens = R.lensPath(props.refDataLensPath);
+        const dataLens = R.lensPath(inputFormOptions.refDataLensPath);
         const data = R.view(dataLens, response);
         setRefData(data);
       });
@@ -35,7 +37,7 @@ const MuiSelect = (props) => {
   return (
     <Controller
     render={({ onChange, onBlur, value}) => (
-      <Select inputProps={{ name: inputLabel }} onChange={(evt) => { onChange(evt); onChangeHandler(evt) }} >
+      <Select inputProps={{ name }} onChange={(evt) => { onChange(evt); formCtx.handleChange(name, evt.target.value) }} >
           <MenuItem value="">
             <em>Select an Option</em>
           </MenuItem>
@@ -50,9 +52,9 @@ const MuiSelect = (props) => {
     )}
         
       
-      name={inputLabel}
+      name={name}
       rules={{ required: "this is required" }}
-      control={control}
+      control={formCtx.control}
       defaultValue=""
     />
   );

@@ -15,18 +15,7 @@ import FormGeneratorRender from "./FormGeneratorRender";
 const FormGenerator = (props) => {
   const {
     typesMap,
-    colSize,
-    rowNum,
-    colNum,
-    formOptions,
-    margin,
-    enableFooter,
-    enableFooterButtons,
-    readOnlyMode,
-    styleFormWrapper,
-    styleFormBody,
-    styleFormFooter,
-    children,
+    formOptions
   } = props;
 
   // FORM GENERATOR
@@ -43,12 +32,11 @@ const FormGenerator = (props) => {
     computeDisabledItems(formOptions)
   );
 
-  const handleChange = useCallback((event) => {
-    console.log(event);
+  const handleChange = useCallback((sourceId, data) => {
 
     // HANDLE DISABLE WITHOUT BEING TOUCHED
     const fieldsDependingOnCurrentChangedInput = findAllFieldsWhereInputIsADepedency(
-      event.target.id || event.target.name,
+      sourceId,
       formOptions
     );
     if (fieldsDependingOnCurrentChangedInput.length > 0) {
@@ -80,12 +68,12 @@ const FormGenerator = (props) => {
       );
     }
     // HANDLE DEPENDENCY RESET
-    if (dependenciesMapping[event.target.id]) {
-      const fieldsToResetFromDependency = dependenciesMapping[event.target.id];
+    if (dependenciesMapping[sourceId]) {
+      const fieldsToResetFromDependency = dependenciesMapping[sourceId];
       fieldsToResetFromDependency.forEach((fieldName) => {
         const formEntry = filterFormOptionsEntryByLabel(formOptions, fieldName);
         setValue(fieldName, formEntry.defaultValue);
-        handleChange({ target: { id: fieldName } }); // recursive
+        handleChange(fieldName, undefined); // recursive
       });
     }
   }, []);
