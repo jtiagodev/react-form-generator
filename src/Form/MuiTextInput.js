@@ -5,7 +5,6 @@ import FormContext from "./../FormGenerator/context";
 const TextInput = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
-  const onChangeHandler = (evt) => formCtx.handleChange(evt);
 
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
@@ -22,12 +21,11 @@ const TextInput = (props) => {
         <TextField 
         id={name} 
         disabled={disabled}
-        onChange={onChangeHandler} 
+        onChange={(evt) => formCtx.handleChange(name, evt.target.value)} 
         inputProps={{ name }} 
         label={inputFormOptions.inputProps.labelDisplay ? inputFormOptions.inputProps.labelText : ''} 
         inputRef={formCtx.register({ ...inputFormOptions.validation })} 
         InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly) }}
-        
         />
 
     );

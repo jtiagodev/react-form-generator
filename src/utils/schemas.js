@@ -13,6 +13,7 @@ export const MuiTextInputPropsSchema = Joi.object().keys({
     labelDisplay: Joi.bool(),
     labelText: Joi.string()
 });
+export const MuiTimePickerTextInputPropsSchema = Joi.object().keys({});
 export const ReactDatePickerPropsSchema = Joi.object().keys({});
 export const ReactNumberFormatPropsSchema = Joi.object().keys({});
 

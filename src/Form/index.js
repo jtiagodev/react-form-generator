@@ -7,6 +7,7 @@ import MuiRadioGroup from "./MuiRadioGroup";
 import MuiSelect from "./MuiSelect";
 import MuiSwitch from "./MuiSwitch";
 import MuiTextInput from "./MuiTextInput";
+import MuiTimePickerTextInput from "./MuiTimePickerTextInput";
 import ReactDatePicker from "./ReactDatePicker";
 import ReactNumberFormat from "./ReactNumberFormat";
 
@@ -16,6 +17,7 @@ export default {
   MuiButton,
   MuiCheckbox,
   MuiDatePicker,
+  MuiTimePickerTextInput,
   MuiRadioGroup,
   MuiSelect,
   MuiSwitch,

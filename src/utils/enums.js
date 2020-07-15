@@ -14,6 +14,7 @@ export const RegisteredInputTypesEnum = {
     MUI_SLIDER: 'MuiSlider',
     MUI_SWITCH: 'MuiSwitch',
     MUI_TEXTINPUT: 'MuiTextInput',
+    MUI_TIMEPICKERTEXTINPUT: 'MuiTimePickerTextInput',
     REACT_DATEPICKER: 'ReactDatePicker',
     REACT_NUMBERFORMAT: 'ReactNumberFormat'
 };

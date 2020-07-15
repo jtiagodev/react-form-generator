@@ -3,6 +3,11 @@ import * as schemas from "../utils/schemas";
 import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 
 export const defaultTypesMap = {
+    MuiTimePickerTextInput: {
+      id: RegisteredInputTypesEnum.MUI_TIMEPICKERTEXTINPUT,
+      render: FormInputs.MuiTimePickerTextInput,
+      inputPropsSchema: schemas.MuiTimePickerTextInputPropsSchema
+    },
     MuiAutoComplete: {
       id: RegisteredInputTypesEnum.MUI_AUTOCOMPLETE,
       render: FormInputs.MuiAutoComplete,
