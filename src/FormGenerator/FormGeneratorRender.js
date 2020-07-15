@@ -55,12 +55,14 @@ const FormGeneratorRender = (props) => {
           </Flex>
         ))}
       </Flex>
+      {!enableFooter && (
       <input style={{ display: "none" }} type="submit" />
+      )}
       {enableFooter && (
         <Flex style={styleFormFooter} flexDirection="row" alignItems="center" justifyContent="flex-end">
           {enableFooterButtons && (
             <>
-              <MuiButton onClick={() => alert("RESET")} text="Submit" />
+              <MuiButton onClick={handleSubmit(onSubmitHandler)} text="Submit" />
               <MuiButton onClick={() => alert("RESET")} text="Clear" />
             </>
           )}

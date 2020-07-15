@@ -67,24 +67,24 @@ export const testFormOptions = [
   //     validate: (value) => value !== "admin" || "Nice try!",
   //   },
   // },
-  // {
-  //   id: 2,
-  //   inputLabel: "text1",
-  //   inputType: RegisteredInputTypesEnum.MUI_TEXTINPUT,
-  //   dependencies: [],
-  //   disableWhileNotFilled: ["select0", "select1", "checkbox1"],
-  //   defaultValue: "Default",
-  //   resetValue: "",
-  //   readOnly: true,
-  //   inputProps: {
-  //     label: "Botao 2",
-  //   },
-  //   margin: "0px 0px 10px 0px",
-  //   showValidation: true,
-  //   validation: {
-  //     validate: (value) => value !== "admin" || "Nice try!",
-  //   },
-  // },
+  {
+    id: 2,
+    inputLabel: "text1",
+    inputType: RegisteredInputTypesEnum.MUI_TEXTINPUT,
+    dependencies: [],
+    disableWhileNotFilled: ["select0", "select1", "checkbox1"],
+    defaultValue: "Default",
+    resetValue: "",
+    readOnly: true,
+    inputProps: {
+      label: "Botao 2",
+    },
+    margin: "0px 0px 10px 0px",
+    showValidation: true,
+    validation: {
+      validate: (value) => value !== "admin" || "Nice try!",
+    },
+  },
   // {
   //   id: 3,
   //   inputLabel: "checkbox1",

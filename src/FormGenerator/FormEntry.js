@@ -10,6 +10,7 @@ import MuiAutoComplete from "../Form/MuiAutoComplete";
 
 const FormEntry = (props) => {
   const { row, col, colNum, formOptions, colSize, margin, typesMap } = props;
+ 
 
   // Calculate which FormEntry to be rendered
   let index;
@@ -88,24 +89,10 @@ const FormEntry = (props) => {
                 <label style={labelStyle}>{labelText}</label>
               </Flex>
             )}
-            <TypeComponent />
-            {/* {formCtx.typesMap[entryType].name !== "MuiAutoComplete" && (
-              <TypeComponent
-              register={formCtx.register}
-              name={entryInputLabel}
-              setValue={formCtx.setValue}
-              value={formCtx.watch[entryInputLabel]}
-              readOnly={formCtx.readOnlyMode || readOnly} // if Form has readonlymode it will flag as TRUE. Otherwise will fall back to input form readonly flag
-              disabledItems={formCtx.disabledItems}
-              id={entryInputLabel}
-              onChangeHandler={(evt) => formCtx.handleChange(evt)}
-              inputRef={formCtx.register({ ...entryValidation })}
-              inputLabel={entryInputLabel}
-              inputProps={entryInputProps}
-              control={formCtx.control}
-            />
-              )} */}
-            {/* <ErrorDisplay /> */}
+            {typesMap[entryType].name !== "MuiAutoComplete" && (
+              <TypeComponent inputFormOptions={inputFormOptions} />
+              )}
+
            
           </Flex>
         </section>

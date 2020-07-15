@@ -1,29 +1,45 @@
 import { TextField } from '@material-ui/core';
-import React, { forwardRef, useRef, useEffect, useState } from 'react';
+import React, { forwardRef, useRef, useEffect, useState, useContext } from 'react';
+import FormContext from "./../FormGenerator/context";
 
 const TextInput = (props) => {
-    const { name, label = "Label", onChangeHandler, inputRef, inputProps, disabledItems, inputLabel, readOnly } = props;
-  
+  const { inputFormOptions } = props;
+  const formCtx = useContext(FormContext);
+  const onChangeHandler = (evt) => formCtx.handleChange(evt);
+
+  // register={formCtx.register}
+  // name={entryInputLabel}
+  // setValue={formCtx.setValue}
+  // value={formCtx.watch[entryInputLabel]}
+  // readOnly={formCtx.readOnlyMode || readOnly} // if Form has readonlymode it will flag as TRUE. Otherwise will fall back to input form readonly flag
+  // disabledItems={formCtx.disabledItems}
+  // id={entryInputLabel}
+  // onChangeHandler={(evt) => formCtx.handleChange(evt)}
+  // inputRef={formCtx.register({ ...entryValidation })}
+  // inputLabel={entryInputLabel}
+  // inputProps={entryInputProps}
+  // control={formCtx.control}
+
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
-    if (disabledItems.includes(name)) {
+    if (formCtx.disabledItems.includes(inputFormOptions.inputLabel)) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [disabledItems]);
+  }, [formCtx.disabledItems, inputFormOptions.inputLabel]);
 
 
     return (
         <TextField 
-        id={inputLabel} 
+        id={inputFormOptions.inputLabel} 
         disabled={disabled}
         onChange={onChangeHandler} 
-        inputProps={{ name: inputLabel }} 
-        label={label} 
-        inputRef={inputRef} 
-        InputProps={{ readOnly: readOnly ? true : false }}
+        inputProps={{ name: inputFormOptions.inputLabel }} 
+        label={inputFormOptions.labelText} 
+        inputRef={formCtx.register({ ...inputFormOptions.validation })} 
+        InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly) }}
         />
 
     );
