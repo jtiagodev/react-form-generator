@@ -31,7 +31,6 @@ const FormGenerator = (props) => {
 
   // FORM GENERATOR
 
-
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
@@ -116,14 +115,12 @@ const FormGenerator = (props) => {
     isValid,
   } = formState;
 
- 
-
   return (
     <FormContext.Provider
       value={{
         formOptions,
         typesMap,
-        // 
+        //
         handleChange: handleChange,
         register: register,
         control: control,
@@ -131,7 +128,7 @@ const FormGenerator = (props) => {
         values: getValues,
         setValue: setValue,
         watch: allWatch,
-        disabledItems
+        disabledItems,
       }}
     >
       <FormGeneratorRender {...props} handleSubmit={handleSubmit} />
@@ -140,4 +137,3 @@ const FormGenerator = (props) => {
 };
 
 export default FormGenerator;
-

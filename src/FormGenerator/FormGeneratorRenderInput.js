@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import FormContext from "./../FormGenerator/context";
-import { InputOptionsSchema } from "./../utils/schemas";
+import FormContext from "./context";
+import { InputOptionsSchema } from "../utils/schemas";
 import { Flex } from "../Form/Grid";
-import ErrorMessage from "./../Form/ErrorMessage";
-import { LabelPositionEnum } from "./../utils/enums";
-import { formOptionDefaultValues } from "./../utils/defaults";
+import ErrorMessage from "../Form/ErrorMessage";
+import { LabelPositionEnum } from "../utils/enums";
+import { formOptionDefaultValues } from "../utils/defaults";
 import * as R from "ramda";
 import MuiAutoComplete from "../Form/MuiAutoComplete";
 
@@ -74,7 +74,7 @@ const FormEntry = (props) => {
     // If TypeMap has a valid Entry
     // TODO: Add schema validation for input on if
     if (typesMap.hasOwnProperty(entryType)) {
-      const TypeComponent = typesMap[entryType].render;
+      const InputTypeComponent = typesMap[entryType].render;
       return (
         <section>
           <Flex
@@ -90,7 +90,7 @@ const FormEntry = (props) => {
               </Flex>
             )}
             {typesMap[entryType].name !== "MuiAutoComplete" && (
-              <TypeComponent inputFormOptions={inputFormOptions} />
+              <InputTypeComponent inputFormOptions={inputFormOptions} />
               )}
 
            
