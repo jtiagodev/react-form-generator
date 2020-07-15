@@ -14,6 +14,8 @@ export const ReactDatePickerPropsSchema = Joi.object().keys({});
 export const ReactNumberFormatPropsSchema = Joi.object().keys({});
 
 export const MuiSelectPropsSchema = Joi.object().keys({
+    // Styles to be passed down to the MUI Component
+    muiStyles: Joi.any(),
     // Options to populate Select
     options: Joi.array().items(Joi.object().keys({
         label: Joi.string().required(),

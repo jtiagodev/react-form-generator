@@ -15,6 +15,7 @@ export const testFormOptions = [
     resetValue: "",
     inputProps: {
       options: countries,
+      muiStyles: {}
     },
     margin: "0px 0px 10px 0px",
     showValidation: true,

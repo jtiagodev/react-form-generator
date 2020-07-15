@@ -10,7 +10,6 @@ import MuiAutoComplete from "../Form/MuiAutoComplete";
 
 const FormEntry = (props) => {
   const { row, col, colNum, formOptions, colSize, margin, typesMap } = props;
- 
 
   // Calculate which FormEntry to be rendered
   let index;
@@ -32,38 +31,22 @@ const FormEntry = (props) => {
       formOptions[index]
     );
 
-    const {
-      cols: entrySize,
-      alignX: entryJustifyContent,
-      alignY: entryAlignItems,
-      inputType: entryType,
-      inputProps: entryInputProps,
-      validation: entryValidation,
-      inputLabel: entryInputLabel,
-      dependencies: entryDependencies,
-      showValidation: entryShowValidation,
-      showLabel,
-      labelPosition,
-      labelMarginRight: labelMargin,
-      labelStyle,
-      labelText,
-      entryStyle,
-      readOnly,
-      margin: entryMargin
-    } = inputFormOptions;
-
-    const divSize = colSize * entrySize;
-    const divMargin = entryMargin || margin;
+    const divSize = colSize * inputFormOptions.cols;
+    const divMargin = inputFormOptions.margin || margin;
 
     // Schema Validation Error
     if (error) {
       return (
         <Flex
           flexDirection="column"
-          justifyContent={entryJustifyContent}
-          alignItems={entryAlignItems}
+          justifyContent={inputFormOptions.alignX}
+          alignItems={inputFormOptions.alignY}
           key={index}
-          style={{ width: `${divSize}px`, margin: divMargin, ...entryStyle }}
+          style={{
+            width: `${divSize}px`,
+            margin: divMargin,
+            ...inputFormOptions.entryStyle,
+          }}
         >
           <ErrorMessage>Invalid Schema</ErrorMessage>
           <ErrorMessage>{error.toString()}</ErrorMessage>
@@ -72,28 +55,31 @@ const FormEntry = (props) => {
     }
 
     // If TypeMap has a valid Entry
-    // TODO: Add schema validation for input on if
-    if (typesMap.hasOwnProperty(entryType)) {
-      const InputTypeComponent = typesMap[entryType].render;
+    if (typesMap.hasOwnProperty(inputFormOptions.inputType)) {
+      const InputTypeComponent = typesMap[inputFormOptions.inputType].render;
       return (
         <section>
           <Flex
-            flexDirection={labelPosition}
-            justifyContent={entryJustifyContent}
-            alignItems={entryAlignItems}
+            flexDirection={inputFormOptions.labelPosition}
+            justifyContent={inputFormOptions.alignX}
+            alignItems={inputFormOptions.alignY}
             key={index}
             style={{ width: `${divSize}px`, margin: divMargin }}
           >
-            {showLabel && (
-              <Flex style={{ marginRight: labelMargin }}>
-                <label style={labelStyle}>{labelText}</label>
+            {inputFormOptions.showLabel && (
+              <Flex style={{ marginRight: inputFormOptions.labelMargin }}>
+                <label style={inputFormOptions.labelStyle}>
+                  {inputFormOptions.labelText}
+                </label>
               </Flex>
             )}
-            {typesMap[entryType].name !== "MuiAutoComplete" && (
-              <InputTypeComponent inputFormOptions={inputFormOptions} />
-              )}
-
-           
+            {typesMap[inputFormOptions.inputType].name !==
+              "MuiAutoComplete" && (
+              <InputTypeComponent
+                inputFormOptions={inputFormOptions}
+                name={inputFormOptions.inputLabel}
+              />
+            )}
           </Flex>
         </section>
       );
@@ -101,12 +87,12 @@ const FormEntry = (props) => {
     } else {
       return (
         <Flex
-          justifyContent={entryJustifyContent}
-          alignItems={entryAlignItems}
+          justifyContent={inputFormOptions.alignX}
+          alignItems={inputFormOptions.alignY}
           key={index}
           style={{ width: `${divSize}px`, margin: divMargin }}
         >
-          <ErrorMessage>{`Undefined 'type' for FormComponent ${entryInputLabel}`}</ErrorMessage>
+          <ErrorMessage>{`Undefined 'type' for FormComponent ${inputFormOptions.inputLabel}`}</ErrorMessage>
         </Flex>
       );
     }

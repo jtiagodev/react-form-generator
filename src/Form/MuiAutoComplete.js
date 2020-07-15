@@ -1,16 +1,41 @@
-/* eslint-disable no-use-before-define */
 import React, { useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { makeStyles } from "@material-ui/core/styles";
 import { Controller } from "react-hook-form";
-import { useWhyDidYouUpdate } from "./../utils/react";
-
 import FormContext from "./../FormGenerator/context";
 
+export default function CountrySelect(props) {
+  const formCtx = useContext(FormContext);
 
-// ISO 3166-1 alpha-2
-// ⚠️ No support for IE 11
+  return (
+    <Controller
+      render={props => (
+        <Autocomplete
+          {...props}
+          options={countries}
+          getOptionLabel={option => option.label}
+          renderOption={option => (
+            <span>
+              {countryToFlag(option.code)}
+              {option.label}
+            </span>
+          )}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Choose a country"
+              variant="outlined"
+            />
+          )}
+          onChange={(_, data) => props.onChange(data)}
+        />
+      )}
+      name="country"
+      control={formCtx.control}
+    />
+  );
+}
+
 function countryToFlag(isoCode) {
   return typeof String.fromCodePoint !== "undefined"
     ? isoCode
@@ -21,70 +46,6 @@ function countryToFlag(isoCode) {
     : isoCode;
 }
 
-const useStyles = makeStyles({
-  option: {
-    fontSize: 15,
-    "& > span": {
-      marginRight: 10,
-      fontSize: 18
-    }
-  }
-});
-
-export default function CountrySelect(props) {
-  const classes = useStyles();
-
-  const formCtx = useContext(FormContext);
-
-  useWhyDidYouUpdate("CountrySelect", props);
-
-
-  return (
-    <Controller
-      as={
-        <Autocomplete
-          id="country-select-demo"
-          style={{ width: 300 }}
-          options={countries}
-          classes={{
-            option: classes.option
-          }}
-          autoHighlight
-          getOptionLabel={option => option.label}
-          renderOption={option => (
-            <React.Fragment>
-              <span>{countryToFlag(option.code)}</span>
-              {option.label} ({option.code}) +{option.phone}
-            </React.Fragment>
-          )}
-          renderInput={params => (
-            <TextField
-              {...params}
-              label="Choose a country"
-              variant="outlined"
-              fullWidth
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "disabled" // disable autocomplete and autofill
-              }}
-            />
-          )}
-        />
-      }
-      onChange={([event, data]) => {
-        console.log(data);
-        return data;
-      }}
-      name="country"
-      control={formCtx.control}
-      defaultValue={{ code: "AF", label: "Afghanistan", phone: "93" }}
-    />
-  );
-}
-
-CountrySelect.whyDidYouRender = true;
-
-// From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
 const countries = [
   { code: "AD", label: "Andorra", phone: "376" },
   { code: "AE", label: "United Arab Emirates", phone: "971" },

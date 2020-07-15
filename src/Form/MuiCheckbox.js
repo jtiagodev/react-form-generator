@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "@material-ui/core";
+import FormContext from "./../FormGenerator/context";
 
-const Checkbox = ({ name, register, setValue, value, disabledItems, onChangeHandler, inputLabel }) => {
+const Checkbox = (props) => {
+  const { inputFormOptions, name } = props;
+
+  const formCtx = useContext(FormContext);
+  const onChangeHandler = (evt) => formCtx.handleChange(evt);
+
   const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
@@ -10,33 +16,33 @@ const Checkbox = ({ name, register, setValue, value, disabledItems, onChangeHand
     const checked = e.target.checked;
 
     setChecked(checked);
-    setValue(name, checked);
+    formCtx.setValue(inputFormOptions.inputLabel, checked);
     onChangeHandler(e);
 
   };
 
   useEffect(() => {
-    register({ name });
-  }, [name, register]);
+    formCtx.register({ name: inputFormOptions.inputLabel });
+  }, [inputFormOptions.inputLabel, formCtx]);
 
   useEffect(() => {
-    if (disabledItems.includes(name)) {
+    if (formCtx.disabledItems.includes(inputFormOptions.inputLabel)) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [disabledItems]);
+  }, [formCtx.disabledItems, inputFormOptions.inputLabel]);
 
   useEffect(() => {
-    if (value !== checked) {
-      setChecked(value);
-      setValue(name, value);
+    if (formCtx.watch[inputFormOptions.inputLabel] !== checked) {
+      setChecked(formCtx.watch[inputFormOptions.inputLabel]);
+      formCtx.setValue(inputFormOptions.inputLabel, formCtx.watch[inputFormOptions.inputLabel]);
     }
-  }, [name, value, setChecked, setValue]);
+  }, [inputFormOptions.inputLabel, formCtx, setChecked, formCtx.setValue]);
 
-  return (
+  return (    
     <MuiCheckbox
-      id={inputLabel}
+      id={name}
       name={name}
       disabled={disabled}
       checked={checked}

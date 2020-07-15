@@ -40,6 +40,7 @@ const TextInput = (props) => {
         label={inputFormOptions.labelText} 
         inputRef={formCtx.register({ ...inputFormOptions.validation })} 
         InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly) }}
+        
         />
 
     );
