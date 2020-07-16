@@ -15,25 +15,28 @@ import {
   import { useForm, Controller } from "react-hook-form";
 import FormContext from "./../FormGenerator/context";
 import { Flex } from "./../Form/Grid";
+import { withStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 
 const MuiRadioGroup = (props) => {
     const { inputFormOptions, name } = props;
     const formCtx = useContext(FormContext);
+    const RadioGroupStyled = withStyles(inputFormOptions.inputProps.muiStyles)(RadioGroup);
+    const RadioStyled = withStyles(inputFormOptions.inputProps.radioStyles)(Radio);
 
     const rowOrientation = inputFormOptions.inputProps.orientation === "row" ? true : false;
 
     return (
 <Controller
   as={
-    <RadioGroup row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
+    <RadioGroupStyled row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
       {inputFormOptions.inputProps.options.map((option , i) => (
         <FormControlLabel
         value={option.value}
-        control={<Radio />}
+        control={<RadioStyled />}
         label={option.label}
       />
       ))}
-    </RadioGroup>
+    </RadioGroupStyled>
   }
   name={name}
   control={formCtx.control}

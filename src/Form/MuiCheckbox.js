@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { Checkbox as MuiCheckbox } from "@material-ui/core";
 import FormContext from "./../FormGenerator/context";
 import { Controller } from "react-hook-form";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const Checkbox = (props) => {
   const { inputFormOptions, name } = props;
+  const CheckboxStyled = withStyles(inputFormOptions.inputProps.muiStyles)(MuiCheckbox);
 
   const formCtx = useContext(FormContext);
   const [checked, setChecked] = useState(false);
@@ -31,7 +33,7 @@ const Checkbox = (props) => {
               name={name}
               control={formCtx.control}
               render={(props) => (
-                <MuiCheckbox
+                <CheckboxStyled
                   onChange={e => { handleChange(e); } }
                   checked={checked}
                   disabled={disabled}

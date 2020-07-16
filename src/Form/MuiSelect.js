@@ -4,10 +4,12 @@ import * as R from 'ramda';
 import { Select, MenuItem } from "@material-ui/core";
 import { useForm, ErrorMessage, Controller } from "react-hook-form";
 import FormContext from "./../FormGenerator/context";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const MuiSelect = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
+  const SelectStyled = withStyles(inputFormOptions.inputProps.muiStyles)(Select);
 
 
 
@@ -37,7 +39,7 @@ const MuiSelect = (props) => {
   return (
     <Controller
     render={({ onChange, onBlur, value}) => (
-      <Select inputProps={{ name }} onChange={(evt) => { onChange(evt); formCtx.handleChange(name, evt.target.value) }} >
+      <SelectStyled inputProps={{ name }} onChange={(evt) => { onChange(evt); formCtx.handleChange(name, evt.target.value) }} >
           <MenuItem value="">
             <em>Select an Option</em>
           </MenuItem>
@@ -48,7 +50,7 @@ const MuiSelect = (props) => {
               </MenuItem>
             );
           })}
-        </Select>
+        </SelectStyled>
     )}
         
       

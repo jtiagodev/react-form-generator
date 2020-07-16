@@ -7,9 +7,12 @@ import {
 import React, { useContext, useState } from 'react';
 import { Controller } from "react-hook-form";
 import FormContext from "./../FormGenerator/context";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const MuiDatePicker = (props) => {
   const { inputFormOptions, name } = props;
+  const DatePickerStyled = withStyles(inputFormOptions.inputProps.muiStyles)(DatePicker);
+
   const formCtx = useContext(FormContext);
   const [selectedDate, handleDateChange] = useState(new Date());
 
@@ -25,7 +28,7 @@ const MuiDatePicker = (props) => {
     control={formCtx.control}
     render={(props) => (
       <MuiPickersUtilsProvider utils={MomentUtils}>
-      <DatePicker
+      <DatePickerStyled
         openTo="year"
         views={["year", "month"]}
         label="Year and Month"

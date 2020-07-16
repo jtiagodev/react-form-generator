@@ -1,10 +1,12 @@
 import { TextField } from '@material-ui/core';
 import React, { forwardRef, useRef, useEffect, useState, useContext } from 'react';
 import FormContext from "./../FormGenerator/context";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const TextInput = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
+  const TextFieldStyled = withStyles(inputFormOptions.inputProps.muiStyles)(TextField);
 
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
@@ -16,9 +18,8 @@ const TextInput = (props) => {
     }
   }, [formCtx.disabledItems, name]);
 
-
     return (
-        <TextField 
+        <TextFieldStyled 
         id={name} 
         disabled={disabled}
         onChange={(evt) => formCtx.handleChange(name, evt.target.value)} 
