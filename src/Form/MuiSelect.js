@@ -9,7 +9,6 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from 
 const MuiSelect = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
-  const SelectStyled = withStyles(inputFormOptions.inputProps.muiStyles)(Select);
 
 
 
@@ -39,7 +38,7 @@ const MuiSelect = (props) => {
   return (
     <Controller
     render={({ onChange, onBlur, value}) => (
-      <SelectStyled inputProps={{ name }} onChange={(evt) => { onChange(evt); formCtx.handleChange(name, evt.target.value) }} >
+      <Select inputProps={{ name }} onChange={(evt) => { onChange(evt); formCtx.handleChange(name, evt.target.value) }} >
           <MenuItem value="">
             <em>Select an Option</em>
           </MenuItem>
@@ -50,7 +49,7 @@ const MuiSelect = (props) => {
               </MenuItem>
             );
           })}
-        </SelectStyled>
+        </Select>
     )}
         
       

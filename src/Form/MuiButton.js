@@ -18,12 +18,11 @@ const buttonDefaultStyles = {
 };
 
   const { inputFormOptions, name, onClick, text, muiStyles = buttonDefaultStyles } = props;
-  const MuiButtonStyled = withStyles(muiStyles)(Button);
 
   return (
-      <MuiButtonStyled id={name} onClick={onClick} variant="contained" color="primary">
+      <MuiButton id={name} onClick={onClick} variant="contained" color="primary">
         {text}
-      </MuiButtonStyled>
+      </MuiButton>
     
   );
 };

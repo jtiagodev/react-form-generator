@@ -7,7 +7,6 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from 
 
 const Checkbox = (props) => {
   const { inputFormOptions, name } = props;
-  const CheckboxStyled = withStyles(inputFormOptions.inputProps.muiStyles)(MuiCheckbox);
 
   const formCtx = useContext(FormContext);
   const [checked, setChecked] = useState(false);
@@ -33,7 +32,7 @@ const Checkbox = (props) => {
               name={name}
               control={formCtx.control}
               render={(props) => (
-                <CheckboxStyled
+                <Checkbox
                   onChange={e => { handleChange(e); } }
                   checked={checked}
                   disabled={disabled}

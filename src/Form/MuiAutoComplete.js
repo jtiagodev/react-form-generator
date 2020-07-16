@@ -11,14 +11,13 @@ import { withStyles } from "@material-ui/core/styles";
 const MuiAutoComplete = (props) => {
   const { inputFormOptions, name } = props;
 
-  const AutocompleteStyled = withStyles(inputFormOptions.inputProps.muiStyles)(Autocomplete);
   const lovOptions = countries; // inputFormOptions.inputProps.options;
   const formCtx = useContext(FormContext);
 
   return (
     <Controller
       render={props => (
-        <AutocompleteStyled
+        <Autocomplete
           {...props}
           options={lovOptions}
           getOptionLabel={option => option.label}

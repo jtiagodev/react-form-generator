@@ -20,23 +20,21 @@ import { withStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 const MuiRadioGroup = (props) => {
     const { inputFormOptions, name } = props;
     const formCtx = useContext(FormContext);
-    const RadioGroupStyled = withStyles(inputFormOptions.inputProps.muiStyles)(RadioGroup);
-    const RadioStyled = withStyles(inputFormOptions.inputProps.radioStyles)(Radio);
 
     const rowOrientation = inputFormOptions.inputProps.orientation === "row" ? true : false;
 
     return (
 <Controller
   as={
-    <RadioGroupStyled row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
+    <RadioGroup row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
       {inputFormOptions.inputProps.options.map((option , i) => (
         <FormControlLabel
         value={option.value}
-        control={<RadioStyled />}
+        control={<Radio />}
         label={option.label}
       />
       ))}
-    </RadioGroupStyled>
+    </RadioGroup>
   }
   name={name}
   control={formCtx.control}

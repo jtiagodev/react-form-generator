@@ -4,9 +4,12 @@ import FormContext from "./../FormGenerator/context";
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const TextInput = (props) => {
-  const { inputFormOptions, name } = props;
+  const { inputFormOptions, name, classes } = props;
   const formCtx = useContext(FormContext);
-  const TextFieldStyled = withStyles(inputFormOptions.inputProps.muiStyles)(TextField);
+
+  const style = inputFormOptions.readOnly
+    ? makeStyles(inputFormOptions.readOnlyStyles)()
+    : makeStyles(inputFormOptions.entryStyle)();
 
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
@@ -19,14 +22,14 @@ const TextInput = (props) => {
   }, [formCtx.disabledItems, name]);
 
     return (
-        <TextFieldStyled 
+        <TextField 
         id={name} 
         disabled={disabled}
         onChange={(evt) => formCtx.handleChange(name, evt.target.value)} 
         inputProps={{ name }} 
         label={inputFormOptions.inputProps.labelDisplay ? inputFormOptions.inputProps.labelText : ''} 
         inputRef={formCtx.register({ ...inputFormOptions.validation })} 
-        InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly) }}
+        InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly), classes: style }}
         />
 
     );

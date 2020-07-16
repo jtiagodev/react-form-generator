@@ -11,7 +11,6 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from 
 
 const MuiDatePicker = (props) => {
   const { inputFormOptions, name } = props;
-  const DatePickerStyled = withStyles(inputFormOptions.inputProps.muiStyles)(DatePicker);
 
   const formCtx = useContext(FormContext);
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -28,7 +27,7 @@ const MuiDatePicker = (props) => {
     control={formCtx.control}
     render={(props) => (
       <MuiPickersUtilsProvider utils={MomentUtils}>
-      <DatePickerStyled
+      <DatePicker
         openTo="year"
         views={["year", "month"]}
         label="Year and Month"

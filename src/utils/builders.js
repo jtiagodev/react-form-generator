@@ -96,12 +96,21 @@ export const MuiTextInputBuilder = (label = uuidv4(), dependencies = [], disable
     readOnly: false,
     inputProps: {
       label: "Botao 2",
+      muiStyles: {
+        root: {
+          background: "black"
+        },
+        input: {
+          color: "white"
+        }
+      }
     },
     margin: "0px 0px 10px 0px",
     showValidation: true,
     validation: {
       validate: (value) => value !== "admin" || "Nice try!",
     },
+    section: "main"
   };
 };
 

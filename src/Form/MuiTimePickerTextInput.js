@@ -6,7 +6,6 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from 
 const MuiTimePickerTextInput = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
-  const TextFieldStyled = withStyles(inputFormOptions.inputProps.muiStyles)(TextField);
 
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);
@@ -18,9 +17,8 @@ const MuiTimePickerTextInput = (props) => {
     }
   }, [formCtx.disabledItems, name]);
 
-
     return (
-        <TextFieldStyled 
+        <TextField 
         id={name} 
         disabled={disabled}
         type="date"
@@ -30,7 +28,6 @@ const MuiTimePickerTextInput = (props) => {
         inputRef={formCtx.register({ ...inputFormOptions.validation })} 
         InputProps={{ readOnly: (formCtx.readOnlyMode || inputFormOptions.readOnly) }}
         />
-
     );
 };
 
