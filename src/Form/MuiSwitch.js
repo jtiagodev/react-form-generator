@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     TextField,
     Checkbox,
@@ -13,21 +13,28 @@ import {
     Slider
   } from "@material-ui/core";
   import { useForm, Controller } from "react-hook-form";
+import FormContext from "./../FormGenerator/context";
 
-const TextInput = (props) => {
-    const { onChange, inputRef, inputProps, inputLabel, control } = props;
+const MuiSwitch = (props) => {
+  const { inputFormOptions, name } = props;
+  const formCtx = useContext(FormContext);
+
 
     return (
-<Controller
-              as={Switch}
-              type="checkbox"
-              name="switch"
-              control={control}
-            />
+      <Controller
+      name={name}
+      control={formCtx.control}
+      render={props => (
+        <Switch
+          onChange={e => { props.onChange(e.target.checked); formCtx.handleChange(name, e.target.checked); }}
+          checked={props.value}
+        />
+      )}
+    />
 
     );
 };
 
-export default TextInput;
+export default MuiSwitch;
 
 

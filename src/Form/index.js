@@ -1,16 +1,22 @@
-import MuiAutoComplete from "./MuiAutoComplete";
+import ControlledInput from "./ControlledInput";
 import ErrorMessage from "./ErrorMessage";
+import HTMLInput from "./HTMLInput";
+import MuiAutoComplete from "./MuiAutoComplete";
 import MuiButton from "./MuiButton";
 import MuiCheckbox from "./MuiCheckbox";
 import MuiDatePicker from "./MuiDatePicker";
+import MuiDateTimePicker from "./MuiDateTimePicker";
 import MuiRadioGroup from "./MuiRadioGroup";
+import MuiRadios from "./MuiRadios";
 import MuiSelect from "./MuiSelect";
+import MuiSlider from "./MuiSlider";
 import MuiSwitch from "./MuiSwitch";
 import MuiTextInput from "./MuiTextInput";
+import MuiTimePicker from "./MuiTimePicker";
 import MuiTimePickerTextInput from "./MuiTimePickerTextInput";
 import ReactDatePicker from "./ReactDatePicker";
 import ReactNumberFormat from "./ReactNumberFormat";
-import HTMLInput from "./HTMLInput";
+import ReactSelect from "./ReactSelect";
 
 export default {
   ErrorMessage,
@@ -21,9 +27,14 @@ export default {
   MuiTimePickerTextInput,
   MuiRadioGroup,
   MuiSelect,
+  MuiSlider,
   MuiSwitch,
   MuiTextInput,
   ReactDatePicker,
   ReactNumberFormat,
-  HTMLInput
+  HTMLInput,
+  MuiDateTimePicker,
+  MuiRadios,
+  MuiTimePicker,
+  ReactSelect
 };

@@ -1,11 +1,8 @@
 
-import Button from "../Form/MuiButton";
-import MuiTextInput from "../Form/MuiTextInput";
-import MuiSelect from "../Form/MuiSelect";
 import { v4 as uuidv4 } from 'uuid';
-import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 import { testFormOptions } from "../utils/demo";
-import {defaultTypesMap} from './registry';
+import { LabelPositionEnum } from "./enums";
+import { defaultTypesMap } from './registry';
 
 export const defaultSections = [ 
     {
@@ -16,6 +13,11 @@ export const defaultSections = [
     {
         id: "section2",
     label: "Second Section",
+    displayLabel: true
+    },
+    {
+        id: "section3",
+    label: "Third Section",
     displayLabel: true
     }
 ];
@@ -59,7 +61,6 @@ export const formGeneratorDefaultValues = {
         useSections: true,
         additionalInputRegistry: {}
 };
-
 
 export const useFormOptions = {
     // mode: 'onSubmit',
