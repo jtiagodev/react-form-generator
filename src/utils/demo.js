@@ -9,7 +9,11 @@ export const testFormOptions = [
   builders.MuiTextInputBuilder("text1", [], ["select0", "select1", "checkbox1"]),
   builders.MuiCheckboxBuilder("checkbox1", [], []),
   builders.MuiDatePickerBuilder("datepicker1", [], []),
-  builders.MuiIimePickerTextInputBuilder("datepickertextinput1", [], [])
+  builders.MuiIimePickerTextInputBuilder("datepickertextinput1", [], []),
+  builders.MuiSelectInputBuilder("select5" , [], [], "section2"),
+  builders.MuiSelectInputBuilder("select6" , [], [], "section2"),
+
+
 ];
 
 export const testFormGeneratorOptions = {

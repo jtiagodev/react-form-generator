@@ -7,6 +7,18 @@ import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 import { testFormOptions } from "../utils/demo";
 import {defaultTypesMap} from './registry';
 
+export const defaultSections = [ 
+    {
+        id: "main",
+    label: "Main Section",
+    displayLabel: true
+    },
+    {
+        id: "section2",
+    label: "Second Section",
+    displayLabel: true
+    }
+];
 
 export const formOptionDefaultValues = {
     cols: 1,
@@ -23,7 +35,8 @@ export const formOptionDefaultValues = {
     labelText: "Input Label",
     labelMarginRight: "10px",
     labelStyle: { fontSize: "12px" },
-    readOnly: false
+    readOnly: false,
+    section: "main",
 };
 
 export const formGeneratorDefaultValues = {
@@ -38,8 +51,11 @@ export const formGeneratorDefaultValues = {
         styleFormWrapper: {},
         styleFormBody: {},
         styleFormFooter: {},
-        readOnlyMode: false
+        readOnlyMode: false,
+        sections: defaultSections,
+        useSections: true
 };
+
 
 export const useFormOptions = {
     // mode: 'onSubmit',

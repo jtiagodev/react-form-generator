@@ -26,11 +26,12 @@ export const MuiAutoCompleteInputBuilder = (label = uuidv4(), dependencies = [],
   refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
   refDataPayload: {},
   refDataLensPath: ['data','ref','select0'],
-  entryStyle: {}
+  entryStyle: {},
+  section: "main"
   };
 };
 
-export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = []) => {
+export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main") => {
   return {
     inputLabel: label,
     inputType: RegisteredInputTypesEnum.MUI_SELECT,
@@ -50,7 +51,8 @@ export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disab
     refDataMethod: RefDataMethodsEnum.GET,
     refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
     refDataPayload: {},
-    refDataLensPath: ['data','ref','select0']
+    refDataLensPath: ['data','ref','select0'],
+    section: section
   };
 };
 

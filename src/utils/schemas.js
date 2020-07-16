@@ -43,6 +43,18 @@ export const ValidationSchema = Joi.object().keys({
     validate: Joi.alternatives(Joi.func())
 });
 
+export const SectionSchema = Joi.object({
+    // TODO: Add more customization such as label component
+    // ID for the Section Schema, where Inputs will be added to (defaults to "main")
+    id: Joi.string(),
+    // Label for the Title
+    label: Joi.string(),
+    // Display Label
+    displayLabel: Joi.bool(),
+    // Display Separator above
+    displaySeparator: Joi.bool()
+});
+
 export const InputOptionsSchema = Joi.object({
     // Label to Identify Value Field within Form
     inputLabel: Joi.string()
@@ -93,7 +105,9 @@ export const InputOptionsSchema = Joi.object({
     // If the component should be readOnly and assume read-only styles
     readOnly: Joi.bool(),
     // Styles to be applied to the Input Component when it's in read only mode
-    readOnlyStyles: Joi.object()
+    readOnlyStyles: Joi.object(),
+    // Which section the Input should be added to
+    section: Joi.string()
 });
 
 export const formGeneratorPropTypesSchema = {
@@ -152,5 +166,13 @@ export const formGeneratorPropTypesSchema = {
     /**
      * Override all Input Form to behave as Read Only (eg. when you want to use the form as a info table)
      */
-    readOnlyMode: PropTypes.bool
+    readOnlyMode: PropTypes.bool,
+    /**
+     * Sections
+     */
+    sections: PropTypes.array,
+    /**
+     * If the Form should use sections or ignore them and spawn all Inputs in the Array order through the col/rows defined
+     */
+    useSections: PropTypes.bool
   };

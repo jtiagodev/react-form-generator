@@ -22,7 +22,6 @@ const TextInput = (props) => {
         id={name} 
         disabled={disabled}
         type="date"
-
         onChange={(evt) => formCtx.handleChange(name, evt.target.value)} 
         inputProps={{ name }} 
         label={inputFormOptions.inputProps.labelDisplay ? inputFormOptions.inputProps.labelText : ''} 

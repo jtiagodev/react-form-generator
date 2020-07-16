@@ -82,3 +82,17 @@ export const checkIfAllDisableDependenciesAreSatisfied = (disableWhileNotFilled,
         return false;
     }
 };
+
+export const computeInputsForSection = (section, formOptions) => {
+    const res = R.filter(option => option.section === section, formOptions);
+    return res;
+};
+
+
+export const computeArray = (count) => {
+    const res = [];
+    for (var i = 0; i < count; i++) {
+      res.push(i);
+    }
+    return res;
+  };

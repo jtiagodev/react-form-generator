@@ -5,6 +5,8 @@ import MuiButton from "./../Form/MuiButton";
 import MuiAutoComplete from "./../Form/MuiAutoComplete";
 import FormContext from "./context";
 import { useWhyDidYouUpdate } from "./../utils/react";
+import FormGeneratorSection from "./FormGeneratorSection";
+import { computeArray } from "./../utils/form";
 
 const FormGeneratorRender = (props) => {
   const {
@@ -22,15 +24,9 @@ const FormGeneratorRender = (props) => {
     styleFormFooter,
     children,
     handleSubmit,
+    sections,
+    useSections
   } = props;
-
-  const computeArray = (count) => {
-    const res = [];
-    for (var i = 0; i < count; i++) {
-      res.push(i);
-    }
-    return res;
-  };
 
   // Aux Row and Cols for Cell Builder with .map
   const [rows, setRows] = useState(computeArray(rowNum));
@@ -43,7 +39,10 @@ const FormGeneratorRender = (props) => {
     <Flex style={styleFormWrapper}>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <Flex style={styleFormBody} flexDirection="column">
-          {rows.map((row, i) => (
+          {useSections && sections.map((sectionSettings, i) => (
+            <FormGeneratorSection {...props} sectionSettings={sectionSettings} />
+          ))}
+          {!useSections && rows.map((row, i) => (
             <Flex flexWrap="wrap" flexDirection="row" key={i}>
               {cols.map((col, j) => (
                 <FormGeneratorRenderInput row={i} col={j} {...props} />
