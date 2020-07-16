@@ -10,6 +10,7 @@ import MuiTextInput from "./MuiTextInput";
 import MuiTimePickerTextInput from "./MuiTimePickerTextInput";
 import ReactDatePicker from "./ReactDatePicker";
 import ReactNumberFormat from "./ReactNumberFormat";
+import HTMLInput from "./HTMLInput";
 
 export default {
   ErrorMessage,
@@ -24,4 +25,5 @@ export default {
   MuiTextInput,
   ReactDatePicker,
   ReactNumberFormat,
+  HTMLInput
 };

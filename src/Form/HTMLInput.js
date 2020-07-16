@@ -6,14 +6,12 @@ import {
 } from '@material-ui/pickers';
 import React, { useContext, useState } from 'react';
 import { Controller } from "react-hook-form";
-import FormContext from "./../FormGenerator/context";
+import FormContext from "../FormGenerator/context";
 
-const ControlledInput = (props) => {
+const HTMLInput = (props) => {
   const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
   const [value, setValue] = useState(inputFormOptions.defaultValue);
-
-  const Input = inputFormOptions.inputProps.inputRender;
 
   const handleChange = (evt) => {
     const val = evt.target.value;
@@ -27,8 +25,8 @@ const ControlledInput = (props) => {
     name={name}
     control={formCtx.control}
     render={(props) => (
-      <Input 
-      value={value}
+      <input 
+      {...inputFormOptions.inputProps}
       onChange={handleChange}
       />
     )}
@@ -36,6 +34,6 @@ const ControlledInput = (props) => {
   );
 };
 
-export default ControlledInput;
+export default HTMLInput;
 
 

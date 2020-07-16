@@ -3,14 +3,7 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 import Button from '@material-ui/core/Button';
 import { green, purple } from '@material-ui/core/colors';
 
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
-
-const MuiColorButton = withStyles((theme) => ({
+const buttonDefaultStyles = {
   root: {
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[500],
@@ -18,16 +11,16 @@ const MuiColorButton = withStyles((theme) => ({
       backgroundColor: purple[700],
     },
   },
-}))(Button);
-
+};
 
 const MuiButton = (props) => {
-  const classes = useStyles();
+  const { inputFormOptions, name, onClick, text, muiStyles = buttonDefaultStyles } = props;
+  const MuiButtonStyled = withStyles(muiStyles)(Button);
 
   return (
-      <MuiColorButton onClick={props.onClick} variant="contained" color="primary" className={classes.margin}>
-        {props.text}
-      </MuiColorButton>
+      <MuiButtonStyled id={name} onClick={onClick} variant="contained" color="primary">
+        {text}
+      </MuiButtonStyled>
     
   );
 };
