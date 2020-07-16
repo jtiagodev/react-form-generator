@@ -4,7 +4,7 @@ import FormContext from "./../FormGenerator/context";
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const TextInput = (props) => {
-  const { inputFormOptions, name, classes } = props;
+  const { inputFormOptions, name } = props;
   const formCtx = useContext(FormContext);
 
   const style = inputFormOptions.readOnly

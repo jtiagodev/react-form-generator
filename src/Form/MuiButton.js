@@ -20,9 +20,9 @@ const buttonDefaultStyles = {
   const { inputFormOptions, name, onClick, text, muiStyles = buttonDefaultStyles } = props;
 
   return (
-      <MuiButton id={name} onClick={onClick} variant="contained" color="primary">
+      <Button id={name} onClick={onClick} variant="contained" color="primary">
         {text}
-      </MuiButton>
+      </Button>
     
   );
 };
