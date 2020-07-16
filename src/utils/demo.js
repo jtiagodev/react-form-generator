@@ -14,7 +14,8 @@ export const testFormOptions = [
   builders.MuiSelectInputBuilder("select6" , [], [], "section2"),
   builders.MuiRadioGroupBuilder("radiogroup1" , [], [], "section2"),
   builders.MuiSliderBuilder("slider1", [], [], "section3"),
-  builders.MuiSwitchBuilder("switch1", [], [], "section3")
+  builders.MuiSwitchBuilder("switch1", [], [], "section3"),
+
 ];
 
 export const testFormGeneratorOptions = {

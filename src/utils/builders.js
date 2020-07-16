@@ -185,8 +185,7 @@ export const MuiTextInputBuilder = (label = uuidv4(), dependencies = [], disable
     showValidation: true,
     validation: {
       validate: (value) => value !== "admin" || "Nice try!",
-    },
-    section: "main"
+    }
   };
 };
 

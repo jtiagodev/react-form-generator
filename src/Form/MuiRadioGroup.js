@@ -29,6 +29,7 @@ const MuiRadioGroup = (props) => {
     <RadioGroup row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
       {inputFormOptions.inputProps.options.map((option , i) => (
         <FormControlLabel
+        key={i}
         value={option.value}
         control={<Radio />}
         label={option.label}
