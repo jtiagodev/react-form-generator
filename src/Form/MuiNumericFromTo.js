@@ -10,13 +10,19 @@ const MuiNumericFromTo = (props) => {
   const [toValue, setToValue] = useState(0);
   const [fromValue, setFromValue] = useState(0);
 
+  // const handleFieldUpdate = (field, value) => {
+
+  // };
+
   return (
     <Controller
       name={name}
       control={formCtx.control}
       render={(props) => (
         <Flex flexDirection="row">
+          <Flex style={{ marginRight: '10px' }}>
           <TextField
+            placeholder="De"
             id={`${name}-from`}
             type="number"
             InputLabelProps={{
@@ -37,8 +43,11 @@ const MuiNumericFromTo = (props) => {
             //   readOnly: formCtx.readOnlyMode || inputFormOptions.readOnly,
             // }}
           />
-          <span> - </span>
+          </Flex>
+          <span>-</span>
+          <Flex style={{ marginLeft: '10px' }}>
           <TextField
+            placeholder="Até"
             id={`${name}-to`}
             type="number"
             InputLabelProps={{
@@ -59,6 +68,7 @@ const MuiNumericFromTo = (props) => {
             //   readOnly: formCtx.readOnlyMode || inputFormOptions.readOnly,
             // }}
           />
+          </Flex>
         </Flex>
       )}
     />
