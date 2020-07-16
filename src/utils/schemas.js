@@ -107,7 +107,9 @@ export const InputOptionsSchema = Joi.object({
     // Styles to be applied to the Input Component when it's in read only mode
     readOnlyStyles: Joi.object(),
     // Which section the Input should be added to
-    section: Joi.string()
+    section: Joi.string(),
+    // The amount of grid cols to spawn the input in (ranges from 1-12)
+    gridCols: Joi.number()
 });
 
 export const formGeneratorPropTypesSchema = {

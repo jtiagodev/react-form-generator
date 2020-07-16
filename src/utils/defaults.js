@@ -37,6 +37,7 @@ export const formOptionDefaultValues = {
     labelStyle: { fontSize: "12px" },
     readOnly: false,
     section: "main",
+    gridCols: 3
 };
 
 export const formGeneratorDefaultValues = {

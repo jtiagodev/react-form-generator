@@ -31,7 +31,7 @@ export const MuiAutoCompleteInputBuilder = (label = uuidv4(), dependencies = [],
   };
 };
 
-export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main") => {
+export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main", gridCols = 3) => {
   return {
     inputLabel: label,
     inputType: RegisteredInputTypesEnum.MUI_SELECT,
@@ -52,7 +52,8 @@ export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disab
     refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
     refDataPayload: {},
     refDataLensPath: ['data','ref','select0'],
-    section: section
+    section: section,
+    gridCols: gridCols
   };
 };
 
