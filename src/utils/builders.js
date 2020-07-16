@@ -94,6 +94,24 @@ export const MuiTextInputBuilder = (label = uuidv4(), dependencies = [], disable
     defaultValue: "Default",
     resetValue: "",
     readOnly: false,
+    readOnlyStyles: {
+      select: {
+        "&:focus": {
+          background: "none",
+        },
+      },
+      icon: {
+        fill: "none",
+      },
+      underline: {
+        "&&&:before": {
+          borderBottom: "none",
+        },
+        "&&:after": {
+          borderBottom: "none",
+        },
+      },
+    },
     inputProps: {
       label: "Botao 2",
       muiStyles: {
