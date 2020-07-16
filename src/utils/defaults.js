@@ -37,7 +37,9 @@ export const formOptionDefaultValues = {
     labelStyle: { fontSize: "12px" },
     readOnly: false,
     section: "main",
-    gridCols: 3
+    gridCols: 3,
+    includePaper: false
+    
 };
 
 export const formGeneratorDefaultValues = {
@@ -54,7 +56,8 @@ export const formGeneratorDefaultValues = {
         styleFormFooter: {},
         readOnlyMode: false,
         sections: defaultSections,
-        useSections: true
+        useSections: true,
+        additionalInputRegistry: {}
 };
 
 

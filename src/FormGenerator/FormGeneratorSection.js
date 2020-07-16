@@ -4,6 +4,8 @@ import FormGeneratorRenderInputSimple from "./../FormGenerator/FormGeneratorRend
 import { computeInputsForSection } from "./../utils/form";
 import { Grid, Paper, Divider, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { formOptionDefaultValues } from "./../utils/defaults";
+import * as R from 'ramda';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -48,16 +50,30 @@ const FormGeneratorSection = (props) => {
         )}
       </Flex>
       <Grid container spacing={3}>
-        {sectionInputs.map((sectionInput, i) => (
-          <Grid item xs={sectionInput.gridCols}>
-            <Paper className={classes.paper}>
-              <FormGeneratorRenderInputSimple
-                inputSettings={sectionInput}
-                {...props}
-              />
-            </Paper>
+        {sectionInputs.map((sectionInput, i) => {
+              // Merges Default Values with Input Configurations provided
+    const mergeSectionInputWithDefaults = R.merge(
+      formOptionDefaultValues,
+      sectionInput
+    );
+
+          return (
+            <Grid item xs={sectionInput.gridCols}>
+            <>
+            {!sectionInput.includePaper && (<FormGeneratorRenderInputSimple
+                            inputSettings={mergeSectionInputWithDefaults}
+                            {...props}
+                          />)}
+            {sectionInput.includePaper && (
+                          <Paper className={classes.paper}>
+                          <FormGeneratorRenderInputSimple
+                            inputSettings={mergeSectionInputWithDefaults}
+                            {...props}
+                          /></Paper>)}
+                          </>
           </Grid>
-        ))}
+          )
+            })}
       </Grid>
     </Flex>
   );

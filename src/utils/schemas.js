@@ -114,7 +114,9 @@ export const InputOptionsSchema = Joi.object({
     // Which section the Input should be added to
     section: Joi.string(),
     // The amount of grid cols to spawn the input in (ranges from 1-12)
-    gridCols: Joi.number()
+    gridCols: Joi.number(),
+    // Should include surrounding Paper on the Input
+    includePaper: Joi.bool()
 });
 
 export const formGeneratorPropTypesSchema = {
@@ -126,10 +128,12 @@ export const formGeneratorPropTypesSchema = {
      * Maximum Height of the Form Container
      */
     maxHeight: PropTypes.string,
-    /**
-     * (Advanced usage) Mapping the supported types of Form Inputs provided to the Form Generator
-     */
+    // TODO: Include typesMap inside
     typesMap: PropTypes.object,
+    /**
+     * (Advanced usage) Mapping the supported types of Form Inputs provided to the Form Generator. Additional Input Registry
+     */
+    additionalInputRegistry: PropTypes.object,
     /**
      * Size for a column (in pixels)
      */
