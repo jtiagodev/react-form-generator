@@ -20,8 +20,10 @@ export const RegisteredInputTypesEnum = {
     MUI_SWITCH: 'MuiSwitch',
     MUI_TEXTINPUT: 'MuiTextInput',
     MUI_TIMEPICKERTEXTINPUT: 'MuiTimePickerTextInput',
+    MUI_NUMERICFROMTO: 'MuiNumericFromTo',
     REACT_DATEPICKER: 'ReactDatePicker',
-    REACT_NUMBERFORMAT: 'ReactNumberFormat'
+    REACT_NUMBERFORMAT: 'ReactNumberFormat',
+    HTML_INPUT: 'HTMLInput'
 };
 
 export const RefDataMethodsEnum = {

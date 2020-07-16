@@ -3,6 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { testFormOptions } from "../utils/demo";
 import { LabelPositionEnum } from "./enums";
 import { defaultTypesMap } from './registry';
+import * as R from 'ramda';
+
+
+export const mergeFormOptionsWithDefaults = (formOptions) => {
+    const formOptionsWithDefaults = formOptions.map((option, i) => {
+        // Merges Default Values with Input Configurations provided
+        return R.merge(
+            formOptionDefaultValues,
+            option
+          );
+    });
+    return formOptionsWithDefaults;
+}
 
 export const defaultSections = [ 
     {
@@ -30,6 +43,7 @@ export const formOptionDefaultValues = {
     validation: { required: "Required" },
     inputLabel: uuidv4(),
     dependencies: [],
+    disableWhileNotFilled: [], 
     showValidation: true,
     showLabel: true,
     labelDisplay: true,
@@ -50,7 +64,7 @@ export const formGeneratorDefaultValues = {
         rowNum: 2,
         colNum: 5,
         margin: "5px",
-        formOptions: testFormOptions,
+        formOptions: mergeFormOptionsWithDefaults(testFormOptions),
         enableFooter: true,
         enableFooterButtons: true,
         styleFormWrapper: {},

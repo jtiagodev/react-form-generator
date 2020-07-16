@@ -2,6 +2,13 @@ import { RegisteredInputTypesEnum, RefDataMethodsEnum, OrientationEnum } from ".
 import { sampleSelectOptions, countries } from './demo-lov';
 import { v4 as uuidv4 } from 'uuid';
 
+export const InputBuilder = (label = uuidv4(), type = RegisteredInputTypesEnum.MUI_TEXTINPUT, rest = {}) => {
+  return {
+    inputLabel: label,
+    inputType: type,
+    ...rest
+  }
+};
 
 export const MuiSliderBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main") => {
   return {

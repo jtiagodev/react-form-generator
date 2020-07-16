@@ -1,8 +1,10 @@
 import * as builders from "./builders";
+import { RegisteredInputTypesEnum } from "./enums";
 
 
 // TODO: Convert id / inputLabel to testFormOptions attribute, to assure unique IDs
 export const testFormOptions = [
+  builders.InputBuilder("input1", RegisteredInputTypesEnum.MUI_NUMERICFROMTO),
   builders.MuiAutoCompleteInputBuilder("autocomplete1", []),
   builders.MuiSelectInputBuilder("select0" , ["text1"]),
   // builders.MuiSelectInputBuilder("select1" , ["select0"]),

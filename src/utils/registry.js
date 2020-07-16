@@ -3,6 +3,16 @@ import * as schemas from "../utils/schemas";
 import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 
 export const defaultTypesMap = {
+    MuiNumericFromTo: {
+      id: RegisteredInputTypesEnum.MUI_NUMERICFROMTO,
+      render: FormInputs.MuiNumericFromTo,
+      inputPropsSchema: schemas.MuiNumericFromToPropsSchema
+    },
+    HTMLInput: {
+      id: RegisteredInputTypesEnum.HTML_INPUT,
+      render: FormInputs.HTMLInput,
+      inputPropsSchema: schemas.HTMLInputPropsSchema
+    },
     MuiTimePickerTextInput: {
       id: RegisteredInputTypesEnum.MUI_TIMEPICKERTEXTINPUT,
       render: FormInputs.MuiTimePickerTextInput,

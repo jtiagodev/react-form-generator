@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import { formOptionDefaultValues } from "./defaults";
+
 
 export const computeDependencies = (formOptions = []) => {
     let dependenciesMap = {};
@@ -85,16 +85,11 @@ export const checkIfAllDisableDependenciesAreSatisfied = (disableWhileNotFilled,
 };
 
 export const computeInputsForSection = (section, formOptions) => {
-    const formOptionsWithDefaults = formOptions.map((option, i) => {
-            // Merges Default Values with Input Configurations provided
-            return R.merge(
-                formOptionDefaultValues,
-                option
-              );
-    });
-    const res = R.filter(option => option.section === section, formOptionsWithDefaults);
+
+    const res = R.filter(option => option.section === section, formOptions);
     return res;
 };
+
 
 
 export const computeArray = (count) => {

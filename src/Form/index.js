@@ -18,8 +18,12 @@ import ReactDatePicker from "./ReactDatePicker";
 import ReactNumberFormat from "./ReactNumberFormat";
 import ReactSelect from "./ReactSelect";
 import MuiCurrencyTextField from "./MuiCurrencyTextField";
+import MuiNumericTextField from "./MuiNumericTextField";
+import MuiNumericFromTo from "./MuiNumericFromTo";
 
 export default {
+  MuiNumericTextField,
+  MuiNumericFromTo,
   ErrorMessage,
   MuiAutoComplete,
   MuiButton,
