@@ -12,6 +12,7 @@ export const testFormOptions = [
   builders.MuiIimePickerTextInputBuilder("datepickertextinput1", [], []),
   builders.MuiSelectInputBuilder("select5" , [], [], "section2"),
   builders.MuiSelectInputBuilder("select6" , [], [], "section2"),
+  builders.MuiRadioGroupBuilder("radiogroup1" , [], [], "section2")
 
 
 ];

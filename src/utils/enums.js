@@ -3,6 +3,11 @@ export const LabelPositionEnum = {
     TOP: 'column'
 };
 
+export const OrientationEnum = {
+    VERTICAL: "column",
+    HORIZONTAL: "row"
+};
+
 export const RegisteredInputTypesEnum = {
     MUI_BUTTON: 'MuiButton',
     MUI_TEXTINPUT: 'MuiTextInput',

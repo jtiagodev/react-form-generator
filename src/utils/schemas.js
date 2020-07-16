@@ -6,7 +6,12 @@ export const MuiAutoCompletePropsSchema = Joi.object().keys({});
 export const MuiButtonPropsSchema = Joi.object().keys({});
 export const MuiCheckboxPropsSchema = Joi.object().keys({});
 export const MuiDatePickerPropsSchema = Joi.object().keys({});
-export const MuiRadioGroupPropsSchema = Joi.object().keys({});
+export const MuiRadioGroupPropsSchema = Joi.object().keys({
+    // Row or Column (use the Enum)
+    orientation: Joi.string(),
+    ariaLabel: Joi.string(),
+    options: Joi.array()
+});
 export const MuiSliderPropsSchema = Joi.object().keys({});
 export const MuiSwitchPropsSchema = Joi.object().keys({});
 export const MuiTextInputPropsSchema = Joi.object().keys({

@@ -49,7 +49,7 @@ const FormGeneratorSection = (props) => {
       </Flex>
       <Grid container spacing={3}>
         {sectionInputs.map((sectionInput, i) => (
-          <Grid item xs={3}>
+          <Grid item xs={sectionInput.gridCols}>
             <Paper className={classes.paper}>
               <FormGeneratorRenderInputSimple
                 inputSettings={sectionInput}

@@ -1,4 +1,4 @@
-import { RegisteredInputTypesEnum, RefDataMethodsEnum } from "./enums";
+import { RegisteredInputTypesEnum, RefDataMethodsEnum, OrientationEnum } from "./enums";
 import { sampleSelectOptions, countries } from './demo-lov';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -56,6 +56,34 @@ export const MuiSelectInputBuilder = (label = uuidv4(), dependencies = [], disab
     gridCols: gridCols
   };
 };
+
+export const MuiRadioGroupBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main", gridCols = 3) => {
+  return {
+    inputLabel: label,
+    inputType: RegisteredInputTypesEnum.MUI_RADIOGROUP,
+    dependencies: dependencies,
+    disableWhileNotFilled: disableWhileNotFilled,
+    defaultValue: sampleSelectOptions[0].value,
+    resetValue: "",
+    inputProps: {
+      orientation: OrientationEnum.HORIZONTAL,
+      options: sampleSelectOptions,
+    },
+    margin: "0px 0px 10px 0px",
+    showValidation: true,
+    validation: {
+      validate: (value) => value !== "admin" || "Nice try!",
+    },
+    useRefDataLoader: false,
+    refDataMethod: RefDataMethodsEnum.GET,
+    refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
+    refDataPayload: {},
+    refDataLensPath: ['data','ref','select0'],
+    section: section,
+    gridCols: 6
+  };
+};
+
 
 export const MuiTextInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = []) => {
   return {

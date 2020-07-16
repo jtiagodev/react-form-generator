@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     TextField,
     Checkbox,
@@ -13,28 +13,30 @@ import {
     Slider
   } from "@material-ui/core";
   import { useForm, Controller } from "react-hook-form";
+import FormContext from "./../FormGenerator/context";
+import { Flex } from "./../Form/Grid";
 
 const MuiRadioGroup = (props) => {
-    const { control } = props;
-    
+    const { inputFormOptions, name } = props;
+    const formCtx = useContext(FormContext);
+
+    const rowOrientation = inputFormOptions.inputProps.orientation === "row" ? true : false;
+
     return (
 <Controller
   as={
-    <RadioGroup aria-label="gender">
-      <FormControlLabel
-        value="female"
+    <RadioGroup row={rowOrientation} aria-label={inputFormOptions.inputProps.ariaLabel}>
+      {inputFormOptions.inputProps.options.map((option , i) => (
+        <FormControlLabel
+        value={option.value}
         control={<Radio />}
-        label="Female"
+        label={option.label}
       />
-      <FormControlLabel
-        value="male"
-        control={<Radio />}
-        label="Male"
-      />
+      ))}
     </RadioGroup>
   }
-  name="RadioGroup"
-  control={control}
+  name={name}
+  control={formCtx.control}
 />
     )
 };
