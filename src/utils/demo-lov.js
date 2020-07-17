@@ -4,6 +4,8 @@ export const sampleSelectOptions = [
     { label: "Label B", value: "b" },
     { label: "Label C", value: "c" },
   ];
+
+export const sampleSliderOptions = [0, 20]
   
   export const countryToFlag = (isoCode) => {
     return typeof String.fromCodePoint !== "undefined"
