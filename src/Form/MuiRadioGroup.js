@@ -35,7 +35,7 @@ const MuiRadioGroup = (props) => {
             <FormControlLabel
               key={i}
               value={option.value}
-              control={<Radio />}
+              control={<Radio color={inputFormOptions.inputProps.color} />}
               label={option.label}
             />
           ))}
