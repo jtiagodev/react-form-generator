@@ -146,7 +146,6 @@ export const MuiSelectInputBuilder = (
     resetValue: "",
     inputProps: {
       options: sampleSelectOptions,
-      readOnly: true,
     },
     margin: "0px 0px 10px 0px",
     showValidation: true,
@@ -160,7 +159,7 @@ export const MuiSelectInputBuilder = (
     refDataLensPath: ["data", "ref", "select0"],
     section: section,
     gridCols: gridCols,
-    readOnly: true,
+    readOnly: false,
     readOnlyStyles: {
       root: {
         select: {

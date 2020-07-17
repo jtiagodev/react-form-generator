@@ -369,3 +369,5 @@ const customTheme = {
     tooltip: 1500,
   },
 };
+
+export default customTheme;

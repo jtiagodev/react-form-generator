@@ -7,11 +7,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import customTheme from "./customTheme";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import * as R from 'ramda';
+
+const defaultMuiTheme = createMuiTheme();
+const mergedTheme = R.merge(customTheme, defaultMuiTheme);
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={customTheme}>
+    <ThemeProvider theme={mergedTheme}>
     <App />
     </ThemeProvider>
   </React.StrictMode>,
