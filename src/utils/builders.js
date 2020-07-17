@@ -21,7 +21,6 @@ export const InputBuilder = (
     ...rest,
   };
 };
-
 export const MuiSliderBuilder = (
   label = uuidv4(),
   dependencies = [],
@@ -178,6 +177,7 @@ export const MuiSelectInputBuilder = (
     },
   };
 };
+
 export const MuiRadioGroupBuilder = (
   label = uuidv4(),
   dependencies = [],
