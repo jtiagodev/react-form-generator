@@ -56,6 +56,7 @@ const MuiSelect = (props) => {
             classes: style,
             readOnly: formCtx.readOnlyMode || inputFormOptions.readOnly,
           }}
+          disableUnderline={inputFormOptions.readOnly}
           defaultValue={inputFormOptions.defaultValue}
           onChange={(evt) => {
             onChange(evt);

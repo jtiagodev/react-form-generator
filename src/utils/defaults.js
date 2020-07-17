@@ -23,21 +23,11 @@ export const defaultSections = [
     label: "Main Section",
     displayLabel: true
     },
-    {
-        id: "section2",
-    label: "Second Section",
-    displayLabel: true
-    },
-    {
-        id: "section3",
-    label: "Third Section",
-    displayLabel: true
-    }
 ];
 export const formOptionDefaultValues = {
     cols: 1,
     alignX: "flex-start",
-    alignY: "center",
+    alignY: "left",
     inputProps: {},
     validation: { required: "Required" },
     inputLabel: uuidv4(),
