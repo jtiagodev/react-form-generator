@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 
+
 export const computeDependencies = (formOptions = []) => {
     let dependenciesMap = {};
 
@@ -84,9 +85,11 @@ export const checkIfAllDisableDependenciesAreSatisfied = (disableWhileNotFilled,
 };
 
 export const computeInputsForSection = (section, formOptions) => {
+
     const res = R.filter(option => option.section === section, formOptions);
     return res;
 };
+
 
 
 export const computeArray = (count) => {

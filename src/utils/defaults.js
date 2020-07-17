@@ -1,11 +1,21 @@
 
-import Button from "../Form/MuiButton";
-import MuiTextInput from "../Form/MuiTextInput";
-import MuiSelect from "../Form/MuiSelect";
 import { v4 as uuidv4 } from 'uuid';
-import { LabelPositionEnum, RegisteredInputTypesEnum } from "./enums";
 import { testFormOptions } from "../utils/demo";
-import {defaultTypesMap} from './registry';
+import { LabelPositionEnum } from "./enums";
+import { defaultTypesMap } from './registry';
+import * as R from 'ramda';
+
+
+export const mergeFormOptionsWithDefaults = (formOptions) => {
+    const formOptionsWithDefaults = formOptions.map((option, i) => {
+        // Merges Default Values with Input Configurations provided
+        return R.merge(
+            formOptionDefaultValues,
+            option
+          );
+    });
+    return formOptionsWithDefaults;
+}
 
 export const defaultSections = [ 
     {
@@ -16,6 +26,11 @@ export const defaultSections = [
     {
         id: "section2",
     label: "Second Section",
+    displayLabel: true
+    },
+    {
+        id: "section3",
+    label: "Third Section",
     displayLabel: true
     }
 ];
@@ -28,6 +43,7 @@ export const formOptionDefaultValues = {
     validation: { required: "Required" },
     inputLabel: uuidv4(),
     dependencies: [],
+    disableWhileNotFilled: [], 
     showValidation: true,
     showLabel: true,
     labelDisplay: true,
@@ -48,7 +64,7 @@ export const formGeneratorDefaultValues = {
         rowNum: 2,
         colNum: 5,
         margin: "5px",
-        formOptions: testFormOptions,
+        formOptions: mergeFormOptionsWithDefaults(testFormOptions),
         enableFooter: true,
         enableFooterButtons: true,
         styleFormWrapper: {},
@@ -59,7 +75,6 @@ export const formGeneratorDefaultValues = {
         useSections: true,
         additionalInputRegistry: {}
 };
-
 
 export const useFormOptions = {
     // mode: 'onSubmit',

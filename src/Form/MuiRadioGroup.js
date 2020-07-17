@@ -33,8 +33,9 @@ const MuiRadioGroup = (props) => {
         >
           {inputFormOptions.inputProps.options.map((option, i) => (
             <FormControlLabel
+              key={i}
               value={option.value}
-              control={<Radio color="primary" />}
+              control={<Radio />}
               label={option.label}
             />
           ))}

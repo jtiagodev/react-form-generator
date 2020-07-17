@@ -1,20 +1,25 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { Checkbox as MuiCheckbox } from "@material-ui/core";
+import { Checkbox } from "@material-ui/core";
 import FormContext from "./../FormGenerator/context";
 import { Controller } from "react-hook-form";
-import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+  useTheme,
+} from "@material-ui/core/styles";
 
-const Checkbox = (props) => {
+const MuiCheckbox = (props) => {
   const { inputFormOptions, name } = props;
-
   const formCtx = useContext(FormContext);
-  const [checked, setChecked] = useState(false);
+//  const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const handleChange = (e) => {
-    setChecked(e.target.checked);
-    formCtx.setValue(name, e.target.checked);
+    // setChecked(e.target.checked);
+    // formCtx.setValue(name, e.target.checked);
     formCtx.handleChange(name, e.target.checked);
   };
 
@@ -26,22 +31,21 @@ const Checkbox = (props) => {
     }
   }, [formCtx.disabledItems, name]);
 
-  return (  
-
+  return (
     <Controller
-              name={name}
-              control={formCtx.control}
-              render={(props) => (
-                <Checkbox
-                  onChange={e => { handleChange(e); } }
-                  checked={checked}
-                  disabled={disabled}
-                />
-              )}
-            />
+    name={name}
+    control={formCtx.control}
+    render={props => (
+      <Checkbox
+        onChange={e => props.onChange(e.target.checked)}
+        checked={props.value}
+        disabled={disabled}
+
+      />
+    )}
+  />
 
   );
 };
 
-
-export default Checkbox;
+export default MuiCheckbox;

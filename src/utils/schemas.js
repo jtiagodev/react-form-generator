@@ -2,6 +2,8 @@ import Joi from "@hapi/joi";
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
+export const MuiNumericFromToPropsSchema = Joi.object().keys({});
+export const HTMLInputPropsSchema = Joi.object().keys({});
 export const MuiAutoCompletePropsSchema = Joi.object().keys({});
 export const MuiButtonPropsSchema = Joi.object().keys({});
 export const MuiCheckboxPropsSchema = Joi.object().keys({});

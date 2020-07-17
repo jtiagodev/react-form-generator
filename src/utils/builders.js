@@ -2,6 +2,71 @@ import { RegisteredInputTypesEnum, RefDataMethodsEnum, OrientationEnum } from ".
 import { sampleSelectOptions, countries } from './demo-lov';
 import { v4 as uuidv4 } from 'uuid';
 
+export const InputBuilder = (label = uuidv4(), type = RegisteredInputTypesEnum.MUI_TEXTINPUT, rest = {}) => {
+  return {
+    inputLabel: label,
+    inputType: type,
+    ...rest
+  }
+};
+
+export const MuiSliderBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main") => {
+  return {
+  inputLabel: label,
+  labelText: "Slider Test",
+  inputType: RegisteredInputTypesEnum.MUI_SLIDER,
+  dependencies: dependencies,
+  cols: 3,
+  disableWhileNotFilled: disableWhileNotFilled,
+  defaultValue: "",
+  resetValue: "",
+  inputProps: {
+   
+  },
+  margin: "0px 0px 10px 0px",
+  showValidation: true,
+  validation: {
+    validate: (value) => value !== "admin" || "Nice try!",
+  },
+  useRefDataLoader: false,
+  refDataMethod: RefDataMethodsEnum.GET,
+  refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
+  refDataPayload: {},
+  refDataLensPath: ['data','ref','select0'],
+  entryStyle: {},
+  section: section
+  };
+};
+
+
+export const MuiSwitchBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = [], section = "main") => {
+  return {
+  inputLabel: label,
+  labelText: "Slider Test",
+  inputType: RegisteredInputTypesEnum.MUI_SWITCH,
+  dependencies: dependencies,
+  cols: 3,
+  disableWhileNotFilled: disableWhileNotFilled,
+  defaultValue: "",
+  resetValue: "",
+  inputProps: {
+   
+  },
+  margin: "0px 0px 10px 0px",
+  showValidation: true,
+  validation: {
+    validate: (value) => value !== "admin" || "Nice try!",
+  },
+  useRefDataLoader: false,
+  refDataMethod: RefDataMethodsEnum.GET,
+  refDataURL: "https://virtserver.swaggerhub.com/NB-WO/Claims/1.0.0",
+  refDataPayload: {},
+  refDataLensPath: ['data','ref','select0'],
+  entryStyle: {},
+  section: section
+  };
+};
+
 export const MuiAutoCompleteInputBuilder = (label = uuidv4(), dependencies = [], disableWhileNotFilled = []) => {
   return {
   inputLabel: label,
@@ -127,8 +192,7 @@ export const MuiTextInputBuilder = (label = uuidv4(), dependencies = [], disable
     showValidation: true,
     validation: {
       validate: (value) => value !== "admin" || "Nice try!",
-    },
-    section: "main"
+    }
   };
 };
 
