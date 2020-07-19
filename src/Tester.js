@@ -1,9 +1,9 @@
 import React from "react";
-import { FormGlobalContextConsumer } from "./FormGenerator/context";
+import BuildReactForm from "build-react-form";
 
 const Tester = (props) => {
   return (
-    <FormGlobalContextConsumer>
+    <BuildReactForm.FormGlobalContextConsumer>
       {(context) => {
         console.log(context);
         return (
@@ -19,7 +19,7 @@ const Tester = (props) => {
           </button>
         );
       }}
-    </FormGlobalContextConsumer>
+    </BuildReactForm.FormGlobalContextConsumer>
   );
 };
 
