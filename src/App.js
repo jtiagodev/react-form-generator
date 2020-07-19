@@ -1,10 +1,9 @@
 import React, { useRef, createRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import FormGenerator from "./FormGenerator/FormGenerator";
-import { formGeneratorDefaultValues, useFormOptions } from "./utils/defaults";
-import FormProvider from "./FormGenerator/FormProvider";
-import { FormGlobalContextConsumer } from "./FormGenerator/context";
+import FormGenerator from "build-react-form/dist/FormGenerator/FormGenerator";
+import { formGeneratorDefaultValues, useFormOptions } from "build-react-form/dist/utils/defaults";
+import FormProvider from "build-react-form/dist/FormGenerator/FormProvider";
 import Tester from "./Tester";
 
 function App() {
