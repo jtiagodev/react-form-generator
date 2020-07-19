@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import FormContext from "./../FormGenerator/context";
+import { FormInternalContext } from "./../FormGenerator/context";
 import { Controller } from "react-hook-form";
 import { Flex } from "./../Form/Grid";
 import { TextField } from "@material-ui/core";
 
 const MuiNumericFromTo = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
   const [toValue, setToValue] = useState(0);
   const [fromValue, setFromValue] = useState(0);
 

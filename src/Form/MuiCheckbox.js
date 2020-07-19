@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Checkbox } from "@material-ui/core";
-import FormContext from "./../FormGenerator/context";
+import {FormInternalContext} from "./../FormGenerator/context";
 import { Controller } from "react-hook-form";
 import {
   createMuiTheme,
@@ -13,7 +13,7 @@ import {
 
 const MuiCheckbox = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
 //  const [checked, setChecked] = useState(false);
   const [disabled, setDisabled] = useState(false);
 

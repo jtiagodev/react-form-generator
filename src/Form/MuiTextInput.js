@@ -1,11 +1,11 @@
 import { TextField } from '@material-ui/core';
 import React, { forwardRef, useRef, useEffect, useState, useContext } from 'react';
-import FormContext from "./../FormGenerator/context";
+import { FormInternalContext } from "./../FormGenerator/context";
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const TextInput = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
 
   const style = inputFormOptions.readOnly
     ? makeStyles(inputFormOptions.readOnlyStyles)()

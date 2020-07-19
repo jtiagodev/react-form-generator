@@ -6,7 +6,7 @@ import React, {
   useState,
   useContext,
 } from "react";
-import FormContext from "./../FormGenerator/context";
+import { FormInternalContext } from "./../FormGenerator/context";
 import {
   createMuiTheme,
   withStyles,
@@ -17,7 +17,7 @@ import {
 
 const MuiTimePickerTextInput = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
 
   // HANDLE DISABLE LOGIC
   const [disabled, setDisabled] = useState(false);

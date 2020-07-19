@@ -1,17 +1,16 @@
 import { Slider } from "@material-ui/core";
 import React, { useContext } from "react";
 import { Controller } from "react-hook-form";
-import FormContext from "./../FormGenerator/context";
+import { FormInternalContext } from "./../FormGenerator/context";
 import { makeStyles } from "@material-ui/core/styles";
 
 const MuiSlider = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
   const style = inputFormOptions.readOnly
     ? makeStyles(inputFormOptions.readOnlyStyles)()
     : makeStyles(inputFormOptions.entryStyle)();
 
-  console.log(inputFormOptions.defaultValue);
 
   return (
     <Controller

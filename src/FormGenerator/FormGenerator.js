@@ -1,5 +1,5 @@
 import * as R from "ramda";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   checkIfAllDisableDependenciesAreSatisfied,
@@ -9,17 +9,31 @@ import {
   filterFormOptionsEntryByLabel,
   findAllFieldsWhereInputIsADepedency,
 } from "../utils/form";
-import FormContext from "./context";
+import { FormInternalContextProvider } from "./context";
 import FormGeneratorRender from "./FormGeneratorRender";
+import { FormGlobalContext } from "./context";
 
 const FormGenerator = (props) => {
+  const FormGlobalCtx = useContext(FormGlobalContext);
+
+  useEffect(() => {
+  
+    let newObject = {};
+    newObject[props.id] = {
+      setValues: (name, value) => setValue(name, value)
+    };
+
+    FormGlobalCtx.setRegisteredForms(newObject);
+    
+  }, []);
+
   const {
     typesMap,
     formOptions
   } = props;
 
-  // FORM GENERATOR
 
+  // FORM GENERATOR
   const [dependenciesMapping, setDependenciesMapping] = useState(
     computeDependencies(formOptions)
   );
@@ -31,6 +45,33 @@ const FormGenerator = (props) => {
   const [disabledItems, setDisabledItems] = useState(
     computeDisabledItems(formOptions)
   );
+
+  
+  // FORM FRAMEWORK
+  const {
+    watch,
+    handleSubmit,
+    register,
+    errors,
+    control,
+    setValue,
+    reset,
+    getValues,
+    formState,
+  } = useForm({});
+
+  const allWatch = watch();
+
+  const {
+    isDirty,
+    dirtyFields,
+    touched,
+    isSubmitted,
+    isSubmitting,
+    submitCount,
+    isValid,
+  } = formState;
+
 
   const handleChange = useCallback((sourceId, data) => {
 
@@ -78,33 +119,9 @@ const FormGenerator = (props) => {
     }
   }, []);
 
-  // FORM FRAMEWORK
-  const {
-    watch,
-    handleSubmit,
-    register,
-    errors,
-    control,
-    setValue,
-    reset,
-    getValues,
-    formState,
-  } = useForm({});
-
-  const allWatch = watch();
-
-  const {
-    isDirty,
-    dirtyFields,
-    touched,
-    isSubmitted,
-    isSubmitting,
-    submitCount,
-    isValid,
-  } = formState;
 
   return (
-    <FormContext.Provider
+    <FormInternalContextProvider
       value={{
         formOptions,
         typesMap,
@@ -119,8 +136,9 @@ const FormGenerator = (props) => {
         disabledItems,
       }}
     >
-      <FormGeneratorRender {...props} handleSubmit={handleSubmit} />
-    </FormContext.Provider>
+                  <FormGeneratorRender {...props} handleSubmit={handleSubmit} />
+
+    </FormInternalContextProvider>
   );
 };
 

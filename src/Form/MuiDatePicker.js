@@ -6,13 +6,13 @@ import {
 } from '@material-ui/pickers';
 import React, { useContext, useState } from 'react';
 import { Controller } from "react-hook-form";
-import FormContext from "./../FormGenerator/context";
+import {FormInternalContext} from "./../FormGenerator/context";
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider, useTheme } from '@material-ui/core/styles';
 
 const MuiDatePicker = (props) => {
   const { inputFormOptions, name } = props;
 
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
   const [selectedDate, handleDateChange] = useState(new Date());
 
   const handleChange = (val) => {

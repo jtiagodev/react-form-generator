@@ -13,11 +13,11 @@ import {
   Slider,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
-import FormContext from "./../FormGenerator/context";
+import { FormInternalContext } from "./../FormGenerator/context";
 
 const MuiSwitch = (props) => {
   const { inputFormOptions, name } = props;
-  const formCtx = useContext(FormContext);
+  const formCtx = useContext(FormInternalContext);
 
   return (
     <Controller

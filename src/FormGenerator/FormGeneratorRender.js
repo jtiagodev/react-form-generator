@@ -3,7 +3,7 @@ import { Flex } from "../Form/Grid";
 import FormGeneratorRenderInput from "./FormGeneratorRenderInput";
 import MuiButton from "./../Form/MuiButton";
 import MuiAutoComplete from "./../Form/MuiAutoComplete";
-import FormContext from "./context";
+import { FormInternalContext } from "./context";
 import { useWhyDidYouUpdate } from "./../utils/react";
 import FormGeneratorSection from "./FormGeneratorSection";
 import { computeArray } from "./../utils/form";

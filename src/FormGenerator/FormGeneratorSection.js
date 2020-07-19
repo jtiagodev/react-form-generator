@@ -35,7 +35,6 @@ const FormGeneratorSection = (props) => {
     computeInputsForSection(sectionSettings.id, formOptions)
   );
 
-  console.log(sectionInputs);
 
   return (
     <Flex flexDirection="column" style={{ width: "100%", height: "100%" }}>
