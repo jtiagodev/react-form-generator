@@ -14,7 +14,6 @@
     "@unicef/material-ui-currency-textfield": "^0.8.6",
     "@welldone-software/why-did-you-render": "^4.2.5",
     "axios": "^0.19.2",
-    "build-react-form": "^1.0.9",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",

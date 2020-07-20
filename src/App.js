@@ -1,17 +1,17 @@
 import React, { useRef, createRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { formGeneratorDefaultValues, useFormOptions } from "build-react-form/utils/defaults";
-import BuildReactForm from "build-react-form";
+import BRF from "build-react-form";
 import Tester from "./Tester";
+import { demoFormInputOptions } from "./utils/demo";
 
 function App() {
   return (
     <div className="App">
-      <BuildReactForm.FormProvider>
-        <BuildReactForm.FormGenerator id="testForm" {...formGeneratorDefaultValues} />
-        <Tester />
-      </BuildReactForm.FormProvider>
+      <BRF.FormProvider>
+        <BRF.FormGenerator id="testForm" inputOptions={demoFormInputOptions} {...BRF.formGeneratorDefaultValues} />
+        {/* <Tester /> */}
+      </BRF.FormProvider>
     </div>
   );
 }
