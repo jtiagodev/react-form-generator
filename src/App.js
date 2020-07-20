@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <BRF.FormProvider>
         <BRF.FormGenerator id="testForm" inputOptions={demoFormInputOptions} {...BRF.formGeneratorDefaultValues} />
-        {/* <Tester /> */}
+        <Tester />
       </BRF.FormProvider>
     </div>
   );
