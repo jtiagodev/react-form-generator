@@ -1,19 +1,24 @@
 import React, { useRef, createRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import BRF from "build-react-form";
-import Tester from "./Tester";
-import { demoFormInputOptions } from "./utils/demo";
+import FormGenerator, { FormProvider } from "build-react-form";
+import TestContext from "./TestContext";
+import { FormInputs as ClaimsListDataFormInputs, sections as ClaimsListDataSections } from "./utils/ClaimListData";
+import { FormInputs as ClaimListFilterFormInputs } from "./utils/ClaimsListFilter";
 
 function App() {
   return (
     <div className="App">
-      <BRF.FormProvider>
-        <BRF.FormGenerator id="testForm" inputOptions={demoFormInputOptions} {...BRF.formGeneratorDefaultValues} />
-        <Tester />
-      </BRF.FormProvider>
+      <FormProvider>
+
+        <FormGenerator id="claimsListFilter" inputOptions={ClaimListFilterFormInputs} />
+        <FormGenerator id="claimsListData" sections={ClaimsListDataSections} inputOptions={ClaimsListDataFormInputs} />
+        
+
+        {/* <TestContext /> */}
+      </FormProvider>
     </div>
   );
-}
+};
 
 export default App;
