@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const OneyItemsTableInput = (props) => {
-    const { data, setData, disabled } = props;
+    const { inputData, setInputData, disabled } = props;
 
     
     // addItemHandler
@@ -15,8 +15,8 @@ const OneyItemsTableInput = (props) => {
 
     return (
         <>
-        <button onClick={evt => { evt.preventDefault(); setData("Goodbye"); }} >ADD DATA TO INPUT</button>
-        <button onClick={evt => { evt.preventDefault(); setData(undefined); }} >RESET DATA</button>
+        <button onClick={evt => { evt.preventDefault(); setInputData("Goodbye"); }} >ADD DATA TO INPUT</button>
+        <button onClick={evt => { evt.preventDefault(); setInputData(undefined); }} >RESET DATA</button>
         </>
     )
 };
