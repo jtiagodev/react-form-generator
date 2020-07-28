@@ -11,15 +11,21 @@ export const sections = [
   },
   { id: "oney", 
     label: "ONEY",
-    displayLabel: true
+    displayLabel: true,
+    muiDividerStyles: CustomMUIStyles.MuiDivider
+
   },
   { id: "items", 
     label: "ITEMS",
-    displayLabel: true
+    displayLabel: true,
+    muiDividerStyles: CustomMUIStyles.MuiDivider
+
   },
   { id: "anexos", 
     label: "ANEXOS",
-    displayLabel: true
+    displayLabel: true,
+    muiDividerStyles: CustomMUIStyles.MuiDivider
+
   },
 ];
 
@@ -52,7 +58,7 @@ const RefData = {
 };
 
 const IDs = {
-  tipo: "estado",
+  tipo: "tipo",
   nif: "NIF",
   numeroDF: "numeroDF",
   nomeFornecedor: "nomeFornecedor",
@@ -155,7 +161,7 @@ const InputOptions = {
   },
   anexos: {
     labelText: "Anexos",
-    displayLabel: false,
+    labelDisplay: false,
     gridCols: 12,
     section: "anexos"
   }
@@ -169,7 +175,7 @@ export const FormInputs = [
   ),
   inputBuilder(
     IDs.nif,
-    Enums.RegisteredInputs.MUI_TEXTINPUT,
+    Enums.RegisteredInputs.MUI_NUMERICTEXTFIELD,
     InputOptions.nif
   ),
   inputBuilder(

@@ -15,9 +15,7 @@ const mergedTheme = R.merge(customTheme, defaultMuiTheme);
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={mergedTheme}>
     <App />
-    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

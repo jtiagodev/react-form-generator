@@ -7,7 +7,9 @@ export const CustomMUIStyles = {
     MuiRadioGroup: {},
     MuiDivider: {
       root: {
-        backgroundColor: 'lightgreen'
+        backgroundColor: '#81BC00',
+        width: '100%',
+        margin: '0px 0px 25px 0px'
       }
     }
   };

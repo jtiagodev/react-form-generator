@@ -67,7 +67,7 @@ const InputOptions = {
   canal: {
     labelText: "Canal",
     dependencies: [IDs.origem],
-    resetValue: "(empty)",
+    resetValue: "",
     inputProps: {
       options: RefData.canal
     }
@@ -105,6 +105,9 @@ const InputOptions = {
       ariaLabel: "atribuicao",
       muiStyles: CustomMUIStyles.MuiRadioGroup
     },
+  },
+  teste: {
+    labelText: "Teste Dinero",
   },
 };
 
@@ -163,5 +166,10 @@ export const FormInputs = [
     IDs.atribuicao,
     Enums.RegisteredInputs.MUI_RADIOGROUP,
     InputOptions.atribuicao
+  ),
+  inputBuilder(
+    "teste",
+    Enums.RegisteredInputs.MUI_CURRENCYTEXTFIELD,
+    InputOptions.teste
   ),
 ];

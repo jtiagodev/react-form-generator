@@ -6,12 +6,10 @@ const OneyItemsTableInput = (props) => {
     
     // addItemHandler
     // removeItemHandler
-    // copyitemHandler
+    // copyItemHandler
     // editItemHandler
     // ...
-    useEffect(() => {
-        // setData("Hello World");
-    }, []);
+
 
     return (
         <>
